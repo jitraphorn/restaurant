@@ -1,45 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+<nav class="gtco-nav" role="navigation">
+	<div class="gtco-container">
+		
+		<div class="row">
+			<div class="col-sm-4 col-xs-12">
+				<div id="gtco-logo"><a href="index.html">Savory <em>.</em></a></div>
+			</div>
+			<div class="col-xs-8 text-right menu-1">
+				<ul>
+					<li><a href="menu.html">Menu</a></li>
+					<li class="has-dropdown">
+						<a href="services.html">Services</a>
+						<ul class="dropdown">
+							<li><a href="#">Food Catering</a></li>
+							<li><a href="#">Wedding Celebration</a></li>
+							<li><a href="#">Birthday's Celebration</a></li>
+						</ul>
+					</li>
+					<li><a href="contact.html">Contact</a></li>
+					<li class="btn-cta"><a href="#"><span>Reservation</span></a></li>
+				</ul>	
+			</div>
+		</div>
+		
+	</div>
+</nav>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
-</html>
+@yield('header')
