@@ -18,3 +18,14 @@ Route::get('/', function () {
 Route::get('/service', function () {
     return view('service.index');
 });
+
+Route::get('/admins/login', function () {
+    return view('admin.login');
+});
+
+Route::get('/admins', function () {
+    return view('admin.index');
+});
+Route::get('/admins/manage', function () {
+    return view('admin.manage');
+});
