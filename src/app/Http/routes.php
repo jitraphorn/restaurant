@@ -19,8 +19,8 @@ Route::get('/service', function () {
     return view('service.index');
 });
 
-Route::get('/admins/login', 'AdminController@login');
-Route::get('/admins', 'AdminController@index');
-Route::get('/admins/manage', function () {
-    return view('admin.manage');
-});
+Route::get('/admin/login', 'UserController@login');
+Route::post('/admin/checklogin', 'UserController@checkLogin');
+
+Route::get('/admin', 'UserController@index');
+Route::get('/admin/manage', 'UserController@manage');

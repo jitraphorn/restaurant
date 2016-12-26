@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-controller="loginControl as loginCtrl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +11,16 @@
     <title>Login </title>
 
     <!-- Bootstrap CSS -->    
-    <link href="{!! asset('admin/css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('assets/backend/css/bootstrap.min.css') !!}" rel="stylesheet">
     <!-- bootstrap theme -->
-    <link href="{!! asset('admin/css/bootstrap-theme.css') !!}" rel="stylesheet">
+    <link href="{!! asset('assets/backend/css/bootstrap-theme.css') !!}" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
-    <link href="{!! asset('admin/css/elegant-icons-style.css') !!}" rel="stylesheet" />
-    <link href="{!! asset('admin/css/font-awesome.css') !!}" rel="stylesheet" />
+    <link href="{!! asset('assets/backend/css/elegant-icons-style.css') !!}" rel="stylesheet" />
+    <link href="{!! asset('assets/backend/css/font-awesome.css') !!}" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="{!! asset('admin/css/style.css') !!}" rel="stylesheet">
-    <link href="{!! asset('admin/css/style-responsive.css') !!}" rel="stylesheet" />
+    <link href="{!! asset('assets/backend/css/style.css') !!}" rel="stylesheet">
+    <link href="{!! asset('assets/backend/css/style-responsive.css') !!}" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
@@ -33,16 +33,16 @@
 
     <div class="container">
 
-      <form class="login-form" action="index.html">        
+      <form class="login-form" ng-submit="submit(data)">        
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" class="form-control" placeholder="Username" autofocus>
+              <input type="text" class="form-control" placeholder="Username" autofocus ng-model="data.username">
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" ng-model="data.password">
             </div>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
@@ -57,4 +57,8 @@
 
 
   </body>
+  <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
+  <script type="text/javascript" src="{!! asset('assets/backend/angular/app.js') !!}"></script>
+  <script type="text/javascript" src="{!! asset('assets/backend/angular/service.js') !!}"></script>
+
 </html>
