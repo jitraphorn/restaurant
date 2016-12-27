@@ -19,6 +19,27 @@ class UserController extends Controller {
 
    public function checkLogin(Request $request){
    	$data = $request::all();
-   	return $data;
+		if(!empty($data['username']) && !empty($data['password'])){
+			
+			$checkUser = user::where('username',$data['username'])->where('password',md5($data['password']))->count() > 0;
+			if($checkUser){
+
+				$users = user::view(array(('username',$data['username'])->where('password',md5($data['password']))->first());
+				
+				$_SESSION['auth'] = $users;
+
+				return ["result"=>true];
+				
+
+			}else{
+				return ["result"=>false];
+				
+			}
+		}else{
+			return ["result"=>false];
+		}
+   		
+   		return $users;
    }
+
 }

@@ -1,5 +1,6 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -20,7 +21,8 @@ Route::get('/service', function () {
 });
 
 Route::get('/admin/login', 'UserController@login');
-Route::post('/admin/checklogin', 'UserController@checkLogin');
+Route::post('/admin/checkLogin', 'UserController@checkLogin');
 
 Route::get('/admin', 'UserController@index');
 Route::get('/admin/manage', 'UserController@manage');
+

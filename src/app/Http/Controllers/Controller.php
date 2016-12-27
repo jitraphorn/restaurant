@@ -18,7 +18,7 @@ class Controller extends BaseController
     	$currentPath = Route::getFacadeRoot()->current()->uri();
     	$adminRoute = substr($currentPath, 0, 5);
     	if($adminRoute == "admin"){
-    		if(!isset($_SESSION['auth']) && $currentPath !== "admin/login" && $currentPath !== "admin/checklogin"){
+    		if(!isset($_SESSION['auth']) && $currentPath !== "admin/login" && $currentPath !== "admin/checkLogin"){
     			return redirect('/admin/login')->send();
     		}
     	}

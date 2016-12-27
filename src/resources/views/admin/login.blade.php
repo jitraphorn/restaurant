@@ -57,6 +57,7 @@
 
 
   </body>
+  <script src="{!! asset('assets/backend/js/jquery.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/backend/angular/app.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/backend/angular/service.js') !!}"></script>
