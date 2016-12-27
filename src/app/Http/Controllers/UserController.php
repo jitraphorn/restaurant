@@ -9,26 +9,26 @@ use Request;
 
 class UserController extends Controller {
 
-    public function index() {
-        return view('admin.index');
-    }
+	public function __construct() {
+		parent::__construct();
+	}
 
-   public function login(){
-         return view('admin.login');
-   }
+	
+	public function login(){
+		return view('admin.login');
+	}
 
-   public function checkLogin(Request $request){
-   	$data = $request::all();
+	public function checkLogin(Request $request){
+		$data = $request::all();
 		if(!empty($data['username']) && !empty($data['password'])){
 			
 			$checkUser = user::where('username',$data['username'])->where('password',md5($data['password']))->count() > 0;
 			if($checkUser){
 
-				$users = user::view(array(('username',$data['username'])->where('password',md5($data['password']))->first());
+				$users = user::where('username',$data['username'])->where('password',md5($data['password']))->first();
 				
 				$_SESSION['auth'] = $users;
-
-				return ["result"=>true];
+				return ["result"=>true,'detail'=>$users];
 				
 
 			}else{
@@ -38,8 +38,44 @@ class UserController extends Controller {
 		}else{
 			return ["result"=>false];
 		}
-   		
-   		return $users;
-   }
 
+		return $users;
+	}
+	public function index(){
+		return view('admin.user.index');
+	}
+
+	public function lists(){
+		return user::get();
+	}
+
+	public function form($id = NULL){
+		if($id){
+			$data = user::where('id',$id)->first();
+			return view('admin.user.form',array("data"=>$data));
+		}else{
+			return view('admin.user.form');
+
+		}
+		
+	}
+
+	public function add(Request $request){
+		$data = $request::all();
+		if(!$data['id']){
+			$result = user::insert($data);
+		}else{
+			$table = user::where('id', $data['id']);
+            $result = $table->update($data);
+		}
+		return ['result'=>$result];
+	}
+
+	public function delete($id = NULL){
+		if($id){
+			$result = user::where('id', $id)->delete();
+			return ['result'=>$result];
+		}
+		
+	}
 }

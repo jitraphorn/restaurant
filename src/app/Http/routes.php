@@ -1,6 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
+Blade::setEscapedContentTags('{{%', '%}}');
+Blade::setContentTags('{{{%', '%}}}');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,3 +28,9 @@ Route::post('/admin/checkLogin', 'UserController@checkLogin');
 Route::get('/admin', 'UserController@index');
 Route::get('/admin/manage', 'UserController@manage');
 
+Route::get('/admin/user', 'UserController@index');
+Route::get('/admin/user/list', 'UserController@lists');
+Route::get('/admin/user/form', 'UserController@form');
+Route::get('/admin/user/form/{id}', 'UserController@form');
+Route::post('/admin/user/add', 'UserController@add');
+Route::get('/admin/user/delete/{id}', 'UserController@delete');
