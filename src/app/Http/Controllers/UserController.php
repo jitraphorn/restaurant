@@ -52,11 +52,11 @@ class UserController extends Controller {
 	public function form($id = NULL){
 		if($id){
 			$data = user::where('id',$id)->first();
-			return view('admin.user.form',array("data"=>$data));
 		}else{
-			return view('admin.user.form');
-
+			$data = NULL;
 		}
+
+		return view('admin.user.form',array("data"=>$data));
 		
 	}
 
