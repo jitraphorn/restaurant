@@ -6,7 +6,7 @@
               
        
            
-                      		 @yield('main')
+                      		 <?php echo $__env->yieldContent('main'); ?>
                 
               <!-- project team & activity end -->
      
