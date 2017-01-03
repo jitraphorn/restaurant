@@ -2317,3 +2317,33 @@ Stack trace:
 [2016-12-29 14:03:17] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in C:\Workcopy\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
 Stack trace:
 #0 {main}  
+[2017-01-03 06:25:28] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\customer' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\customerController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:25:37] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\customer' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\customerController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:25:41] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:30:12] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:30:22] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:31:11] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:32:46] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:35:09] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\room' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\roomController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 06:37:46] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\customer' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\customerController.php:49
+Stack trace:
+#0 {main}  
+[2017-01-03 08:21:15] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\customer' not found' in D:\WorkCopy\Project\restaurant\trunk\src\app\Http\Controllers\customerController.php:49
+Stack trace:
+#0 {main}  

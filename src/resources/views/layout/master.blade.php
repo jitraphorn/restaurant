@@ -67,6 +67,8 @@
     <script type="text/javascript" src="{!! asset('assets/js/moment.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('assets/js/bootstrap-datetimepicker.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('assets/js/angular/app.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('assets/js/angular/service.js') !!}"></script>
 
 
     <!-- Main -->

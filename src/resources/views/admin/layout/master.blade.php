@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app" ng-controller="mainControl as mainCtrl">
 <head>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      setTimeout(function(){
+        $('#page-loading').fadeOut();
+        $('#container').show();
+      }, 500);
+    });
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -10,7 +18,7 @@
 
   <title>Home</title>
 
-  <!-- Bootstrap CSS -->    
+  <!-- Bootstrap CSS -->
   <link href="{!! asset('assets/backend/css/bootstrap.min.css') !!}" rel="stylesheet">
   <!-- bootstrap theme -->
   <link href="{!! asset('assets/backend/css/bootstrap-theme.css') !!}" rel="stylesheet">
@@ -33,11 +41,18 @@
   <link href="{!! asset('assets/backend/css/style-responsive.css') !!}" rel="stylesheet" />
   <link href="{!! asset('assets/backend/css/xcharts.min.css') !!}" rel=" stylesheet">	
   <link href="{!! asset('assets/backend/css/jquery-ui-1.10.4.min.css') !!}" rel="stylesheet">
+  <link href="{!! asset('assets/backend/css/icomoon/styles.css') !!}" rel="stylesheet">
+  <link href="{!! asset('assets/backend/css/sweetalert.css') !!}" rel="stylesheet">
   @yield('css')
-
 </head>
 <body>
- <section id="container" class="">
+<div id="page-loading" style="position: fixed;z-index: 999999;width: 100%;height: 100%;background: #1a2732;);color:white;text-align: center;vertical-align: middle;">
+    <div style="position: fixed;left: 0;right: 0;top: 0;bottom: 0;height:120px;width:120px;margin:auto">
+        <img src="/assets/images/admin/preload.svg" style="margin:0 auto;display:block;"> 
+        <p align="center">กำลังโหลด . . .</p>
+    </div>
+</div>
+ <section id="container">
    
   @include('admin.layout.header')
   @include('admin.layout.menu')
@@ -65,7 +80,7 @@
 <script src="{!! asset('assets/backend/js/owl.carousel.js') !!}" ></script>
 
 <!-- jQuery full calendar -->
-<<script src="{!! asset('assets/backend/js/fullcalendar.min.js') !!}"></script> <!-- Full Google Calendar - Calendar -->
+<script src="{!! asset('assets/backend/js/fullcalendar.min.js') !!}"></script> <!-- Full Google Calendar - Calendar -->
 <script src="{!! asset('assets/backend/fullcalendar/fullcalendar/fullcalendar.js') !!}"></script>
 <!--script for this page only-->
 <script src="{!! asset('assets/backend/js/calendar-custom.js') !!}"></script>
@@ -89,6 +104,7 @@
 <script src="{!! asset('assets/backend/js/sparklines.js') !!}"></script>	
 <script src="{!! asset('assets/backend/js/charts.js') !!}"></script>
 <script src="{!! asset('assets/backend/js/jquery.slimscroll.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/backend/js/sweetalert.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/backend/angular/app.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/backend/angular/service.js') !!}"></script>

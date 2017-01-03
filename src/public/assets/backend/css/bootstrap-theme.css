@@ -258,7 +258,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Lato;
+  font-family: Kanit;
   font-size: 14px;
   line-height: 1.428571429;
   color: #2b2b2b;
@@ -393,7 +393,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: Lato;
+  font-family: Kanit;
   font-weight: 400;
   line-height: 1.1;
 }
@@ -603,7 +603,7 @@ address {
 }
 code,
 pre {
-  font-family: Lato;
+  font-family: Kanit;
 }
 code {
   padding: 2px 4px;
@@ -1297,7 +1297,7 @@ th {
 .table tfoot > tr > td {
   padding: 8px;
   line-height: 1.428571429;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #dddddd;
 }
 .table thead > tr > th {

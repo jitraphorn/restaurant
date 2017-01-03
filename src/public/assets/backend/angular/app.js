@@ -43,15 +43,26 @@ app.controller('userControl', function ($scope,dataService,API_URL) {
 	}
 
 	$scope.delete = function(id){
-		dataService.getData("/admin/user/delete/"+id).then(function(res){
-			console.log(res)
-			if(res.data.result){
-				alert("success")
-			}else{
-				alert("failed")
-			}
-			listData();
-		})
+		swal({
+			title: "ต้องการลบใช่หรือไม่?",
+			text: "หากทำการลบแล้วไม่สามารถกู้คืนได้!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "ยืนยัน",
+			closeButtonText: "ปิด",
+			closeOnConfirm: false
+		},
+		function(){
+			dataService.getData("/admin/user/delete/"+id).then(function(res){
+				if(res.data.result){
+					swal("ทำการลบเรียบร้อยแล้ว!", "ข้อมูลที่คุณเลือกถูกลบแล้ว", "success");
+				}else{
+					swal("ทำการลบข้อมูลผิดพลาด!", "ลบข้อมูลผิดพลาดกรุณาลองใหม่อีกครั้ง", "error");
+				}
+				listData();
+			})
+		});
 	}
 
 	function init(){

@@ -14,12 +14,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
+    public $regex = array("admin/login","admin/checkLogin");
+
     public function __construct(){
     	$currentPath = Route::getFacadeRoot()->current()->uri();
     	$adminRoute = substr($currentPath, 0, 5);
     	if($adminRoute == "admin"){
-    		if(!isset($_SESSION['auth']) && $currentPath !== "admin/login" && $currentPath !== "admin/checkLogin"){
-                // return redirect('/admin/login')->send();
+    		if(!isset($_COOKIE['auth']) && array_search($currentPath,$this->regex)){
+                return redirect('/admin/login')->send();
+    		}else{
+
     		}
     	}
     	

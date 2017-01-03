@@ -27,7 +27,7 @@ class UserController extends Controller {
 
 				$users = user::where('username',$data['username'])->where('password',md5($data['password']))->first();
 				
-				$_SESSION['auth'] = $users;
+				$_COOKIE['auth'] = $users;
 				return ["result"=>true,'detail'=>$users];
 				
 
