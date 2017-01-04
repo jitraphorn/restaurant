@@ -62,7 +62,7 @@ class UserController extends Controller {
 
 	public function add(Request $request){
 		$data = $request::all();
-		if(!$data['id']){
+		if(!isset($data['id'])){
 			$result = user::insert($data);
 		}else{
 			$table = user::where('id', $data['id']);

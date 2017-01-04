@@ -7,46 +7,14 @@ use App\Http\Controllers\LogSystemController;
 use App\menu as menu; // add model
 use Request;
 
-class roomController extends Controller {
+class MenuController extends Controller {
 
 	public function __construct() {
 		parent::__construct();
 	}
 
-	
-	public function login(){
-		return view('admin.login');
-	}
-
-	public function checkLogin(Request $request){
-		$data = $request::all();
-		if(!empty($data['username']) && !empty($data['password'])){
-			
-			$checkUser = user::where('username',$data['username'])->where('password',md5($data['password']))->count() > 0;
-			if($checkUser){
-
-				$users = user::where('username',$data['username'])->where('password',md5($data['password']))->first();
-				
-				$_SESSION['auth'] = $users;
-				return ["result"=>true,'detail'=>$users];
-				
-
-			}else{
-				return ["result"=>false];
-				
-			}
-		}else{
-			return ["result"=>false];
-		}
-
-		return $users;
-	}
 	public function index(){
 		return view('admin.menu.index');
-	}
-
-	public function lists(){
-		return menu::get();
 	}
 
 	public function form($id = NULL){
@@ -58,6 +26,10 @@ class roomController extends Controller {
 
 		return view('admin.menu.form',array("data"=>$data));
 		
+	}
+
+	public function lists(){
+		return menu::get();
 	}
 
 	public function add(Request $request){

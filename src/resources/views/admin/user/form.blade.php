@@ -14,30 +14,44 @@
 		</div>
 	</div>
 	<form ng-submit="add(data)">
-		<div class="form-group">
-			<label for="username">Username :</label>
-			<input type="username" class="form-control" id="username" ng-model="data.username">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="username">ชื่อผู้ใช้</label>
+				<input type="username" class="form-control" id="username" ng-model="data.username" ng-disabled="data.id">
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="pwd">Password :</label>
-			<input type="password" class="form-control" id="pwd" ng-model="data.password">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="pwd">รหัสผ่าน</label>
+				<input type="password" class="form-control" id="pwd" ng-model="data.password" ng-disabled="data.id">
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="name">Name :</label>
-			<input type="name" class="form-control" id="name" ng-model="data.name">
+		<div class="clearfix"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="name">ชื่อ-นามสกุล</label>
+				<input type="name" class="form-control" id="name" ng-model="data.name">
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="email">E-mail:</label>
-			<input type="email" class="form-control" id="email" ng-model="data.email">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="email">อีเมล</label>
+				<input type="email" class="form-control" id="email" ng-model="data.email">
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="role">Role:</label>
-			<select class="form-control" ng-model="data.role">
-				<option value="1">Owner</option>
-				<option value="2">Employee</option>
-			</select>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="role">หน้าที่</label>
+				<select class="form-control" ng-model="data.role">
+					<option value="1">เจ้าของกิจการ</option>
+					<option value="2">พนักงาน</option>
+				</select>
+			</div>
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<div class="clearfix"></div>
+		<div align="center">
+			<button type="submit" class="btn btn-success"><i class="icon-checkmark4"></i> ตกลง</button> <a class="btn btn-default" href="/admin/user"><i class="icon-exit2"></i> ยกเลิก</a>
+		</div>
 	</form>
 </div>
 @endsection

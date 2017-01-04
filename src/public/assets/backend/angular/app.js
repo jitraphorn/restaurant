@@ -6,13 +6,16 @@ app.config(function($httpProvider){
 
 app.controller('mainControl', function ($scope, $http,$timeout,dataService) {
 	console.log("main")
+	$scope.startLoading = function(){
+		$('#page-loading').fadeIn();
+	}
+
+	$scope.endLoading = function(){
+		$('#page-loading').fadeOut();
+	}
 });
 
 app.controller('loginControl', function ($scope,dataService,API_URL) {
-
-	function listData(){
-
-	}
 
 	$scope.submit = function(data){
 		dataService.postData("/admin/checkLogin",data)
@@ -20,13 +23,9 @@ app.controller('loginControl', function ($scope,dataService,API_URL) {
 			if(res.data.result){
 				window.location = API_URL+"/admin/";
 			}else{
-				alert("Username Password incorrect")
+				swal("ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
 			}
 		})
-	}
-
-	function init(){
-
 	}
 });
 
@@ -72,7 +71,7 @@ app.controller('userControl', function ($scope,dataService,API_URL) {
 	init();
 });
 
-app.controller('userFormControl', function ($scope,dataService,API_URL) {
+app.controller('userFormControl', function ($scope,dataService,API_URL,$timeout) {
 	if(data){
 		$scope.data = data;
 		$scope.data.role += "";
@@ -83,13 +82,26 @@ app.controller('userFormControl', function ($scope,dataService,API_URL) {
 
 	$scope.add = function(data){
 		console.log(data);
+		$('#page-loading').fadeIn();
 		dataService.postData("/admin/user/add",data).then(function(res){
 			if(res.data.result){
-				alert("success")
-				window.location = API_URL+"/admin/user";
+				$timeout(function(){
+					swal({
+						title: "การทำรายการสำเร็จ!",
+						text: "ข้อมูลของคุณถูกบันทึกแล้ว",
+						type: "success",
+						confirmButtonClass: "btn-default",
+						confirmButtonText: 'กลับสู่หน้าหลัก',
+					},
+					function(){
+						window.location = API_URL+"/admin/";
+					});
+				},500)
+
 			}else{
-				alert("Fail")
+				swal("การทำรายการผิดพลาด!", "ชื่อผู้ใช้หรืออีเมลของคุณซ้ำ", "error");
 			}
+		$('#page-loading').fadeOut();
 		})
 	}
 
