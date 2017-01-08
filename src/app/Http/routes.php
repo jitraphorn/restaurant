@@ -25,7 +25,7 @@ Route::get('/service', function () {
 Route::get('/admin/login', 'UserController@login');
 Route::post('/admin/checkLogin', 'UserController@checkLogin');
 
-Route::get('/admin', 'UserController@index');
+Route::get('/admin', 'DashboardController@index');
 Route::get('/admin/manage', 'UserController@manage');
 
 Route::get('/admin/user', 'UserController@index');
@@ -35,23 +35,30 @@ Route::get('/admin/user/form/{id}', 'UserController@form');
 Route::post('/admin/user/add', 'UserController@add');
 Route::get('/admin/user/delete/{id}', 'UserController@delete');
 
-Route::get('/admin/customer', 'customerController@index');
-Route::get('/admin/customer/list', 'customerController@lists');
-Route::get('/admin/customer/form', 'customerController@form');
-Route::get('/admin/customer/form/{id}', 'customerController@form');
-Route::post('/admin/customer/add', 'customerController@add');
-Route::get('/admin/customer/delete/{id}', 'customerController@delete');
+Route::get('/admin/customer', 'CustomerController@index');
+Route::get('/admin/customer/list', 'CustomerController@lists');
+Route::get('/admin/customer/form', 'CustomerController@form');
+Route::get('/admin/customer/form/{id}', 'CustomerController@form');
+Route::post('/admin/customer/add', 'CustomerController@add');
+Route::get('/admin/customer/delete/{id}', 'CustomerController@delete');
 
-Route::get('/admin/room', 'roomController@index');
-Route::get('/admin/room/list', 'roomController@lists');
-Route::get('/admin/room/form', 'roomController@form');
-Route::get('/admin/room/form/{id}', 'roomController@form');
-Route::post('/admin/room/add', 'roomController@add');
-Route::get('/admin/room/delete/{id}', 'roomController@delete');
+Route::get('/admin/room', 'RoomController@index');
+Route::get('/admin/room/list', 'RoomController@lists');
+Route::get('/admin/room/form', 'RoomController@form');
+Route::get('/admin/room/form/{id}', 'RoomController@form');
+Route::post('/admin/room/add', 'RoomController@add');
+Route::get('/admin/room/delete/{id}', 'RoomController@delete');
 
-Route::get('/admin/menu', 'menuController@index');
-Route::get('/admin/menu/list', 'menuController@lists');
-Route::get('/admin/menu/form', 'menuController@form');
-Route::get('/admin/menu/form/{id}', 'menuController@form');
-Route::post('/admin/menu/add', 'menuController@add');
-Route::get('/admin/menu/delete/{id}', 'menuController@delete');
+Route::get('/admin/menu', 'MenuController@index');
+Route::get('/admin/menu/list', 'MenuController@lists');
+Route::get('/admin/menu/form', 'MenuController@form');
+Route::get('/admin/menu/form/{id}', 'MenuController@form');
+Route::post('/admin/menu/add', 'MenuController@add');
+Route::get('/admin/menu/delete/{id}', 'MenuController@delete');
+
+Route::get('/admin/books', 'BookingController@index');
+Route::get('/admin/books/list', 'BookingController@lists');
+Route::get('/admin/books/form', 'BookingController@form');
+Route::get('/admin/books/form/{id}', 'BookingController@form');
+Route::post('/admin/books/add', 'BookingController@add');
+Route::get('/admin/books/delete/{id}', 'BookingController@delete');

@@ -19,13 +19,19 @@ class Controller extends BaseController
     public function __construct(){
     	$currentPath = Route::getFacadeRoot()->current()->uri();
     	$adminRoute = substr($currentPath, 0, 5);
-    	if($adminRoute == "admin"){
-    		if(!isset($_COOKIE['auth']) && array_search($currentPath,$this->regex)){
-                return redirect('/admin/login')->send();
-    		}else{
 
-    		}
+    	if($adminRoute == "admin"){
+            if (!isset($_COOKIE['auth'])) {
+                $currentPath = Route::getFacadeRoot()->current()->uri();
+                if(!array_search($currentPath,$this->regex)){
+                    if($currentPath !== "admin/login"){
+                        return redirect('/admin/login')->send();
+                    }
+                }
+
+            }else{
+                $data = json_decode($_COOKIE['auth']);
+            }
     	}
-    	
     }
 }

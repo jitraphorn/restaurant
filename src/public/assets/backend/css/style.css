@@ -290,6 +290,13 @@ ul.sidebar-menu {
     margin-top: 60px;
 }
 
+.menu-title {
+    padding: 15px;
+    color: #ffffff;
+    font-size:16px;
+    background: #394a59;
+}
+
 #sidebar > ul > li > ul.sub {
     display: none;
 }
@@ -918,9 +925,19 @@ div[data-role="editor-toolbar"] {
   margin-right: 0;
 }
 .breadcrumb li i {
-  Font-size: 15px;
+  font-size: 15px;
   margin-right: 5px;
+  color: #616161;
 }
+
+ol.breadcrumb > li > a {
+    color: #656565;
+}
+
+ol.breadcrumb > li {
+    color: #b1b1b1;
+}
+
 .breadcrumb > .active {
   color: #d4d4d4;
 }

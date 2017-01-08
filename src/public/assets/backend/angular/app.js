@@ -4,7 +4,7 @@ app.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-app.controller('mainControl', function ($scope, $http,$timeout,dataService) {
+app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 	console.log("main")
 	$scope.startLoading = function(){
 		$('#page-loading').fadeIn();
@@ -15,7 +15,7 @@ app.controller('mainControl', function ($scope, $http,$timeout,dataService) {
 	}
 });
 
-app.controller('loginControl', function ($scope,dataService,API_URL) {
+app.controller('loginController', function ($scope,dataService,API_URL) {
 
 	$scope.submit = function(data){
 		dataService.postData("/admin/checkLogin",data)
@@ -29,16 +29,15 @@ app.controller('loginControl', function ($scope,dataService,API_URL) {
 	}
 });
 
-app.controller('userControl', function ($scope,dataService,API_URL) {
+app.controller('userController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#user-menu").addClass('active');
 
 	function listData(){
 		dataService.getData("/admin/user/list").then(function(res){
 			$scope.data = res.data;
 		})
-	}
-
-	$scope.form = function(){
-		window.location = API_URL+"/admin/user/form";
 	}
 
 	$scope.delete = function(id){
@@ -71,7 +70,11 @@ app.controller('userControl', function ($scope,dataService,API_URL) {
 	init();
 });
 
-app.controller('userFormControl', function ($scope,dataService,API_URL,$timeout) {
+app.controller('userFormController', function ($scope,dataService,API_URL,$timeout) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#user-menu").addClass('active');
+
 	if(data){
 		$scope.data = data;
 		$scope.data.role += "";
@@ -94,7 +97,7 @@ app.controller('userFormControl', function ($scope,dataService,API_URL,$timeout)
 						confirmButtonText: 'กลับสู่หน้าหลัก',
 					},
 					function(){
-						window.location = API_URL+"/admin/";
+						window.location = API_URL+"/admin/user";
 					});
 				},500)
 
@@ -114,6 +117,9 @@ app.controller('userFormControl', function ($scope,dataService,API_URL,$timeout)
 
 
 app.controller('customerController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#customer-menu").addClass('active');
 
 	function listData(){
 		dataService.getData("/admin/customer/list").then(function(res){
@@ -144,13 +150,16 @@ app.controller('customerController', function ($scope,dataService,API_URL) {
 	init();
 });
 
-app.controller('customerFormControl', function ($scope,dataService,API_URL) {
+app.controller('customerFormController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#customer-menu").addClass('active');
+
 	if(data){
 		$scope.data = data;
-		$scope.data.role += "";
+		$scope.data.type += "";
 	}else{
 		$scope.data = {};
-		$scope.data.role = "1"
 	}
 
 	$scope.add = function(data){
@@ -174,6 +183,9 @@ app.controller('customerFormControl', function ($scope,dataService,API_URL) {
 
 
 app.controller('roomController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#room-menu").addClass('active');
 
 	function listData(){
 		dataService.getData("/admin/room/list").then(function(res){
@@ -204,13 +216,16 @@ app.controller('roomController', function ($scope,dataService,API_URL) {
 	init();
 });
 
-app.controller('roomFormControl', function ($scope,dataService,API_URL) {
+app.controller('roomFormController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#room-menu").addClass('active');
+	$scope.Image = []; // array for multiple image form add
+
 	if(data){
 		$scope.data = data;
-		$scope.data.role += "";
 	}else{
 		$scope.data = {};
-		$scope.data.role = "1"
 	}
 
 	$scope.add = function(data){
@@ -225,6 +240,16 @@ app.controller('roomFormControl', function ($scope,dataService,API_URL) {
 		})
 	}
 
+	$scope.addImage = function(){
+		$scope.Image.push({label:''});
+	}
+
+	$scope.removeImage = function(){
+		$scope.Image.pop();
+	}
+
+	
+
 	function init(){
 		
 	}
@@ -234,6 +259,9 @@ app.controller('roomFormControl', function ($scope,dataService,API_URL) {
 
 
 app.controller('menuController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#menu-menu").addClass('active');
 
 	function listData(){
 		dataService.getData("/admin/menu/list").then(function(res){
@@ -257,6 +285,46 @@ app.controller('menuController', function ($scope,dataService,API_URL) {
 		})
 	}
 
+
+	$scope.deleteImage = function(x){
+		swal({
+			title: "คุณต้องการลบหรือไม่?",
+			text: "คุณจะไม่สามารถกู้คืนข้อมูลได้หากทำการลบ!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#EF5350",
+			confirmButtonText: "ใช่ ต้องการลบ!",
+			cancelButtonText: "ไม่ใช่, ทำการยกเลิก!",
+			closeOnConfirm: false,
+			closeOnCancel: false
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				// ajax delete
+				dataService.getData("tour/drop_image/",x.id).then(function(res){
+					dataService.getData("tour/list_image/",x.tour_id).then(function(res){
+						$scope.dataImage = res;
+					})
+				})
+
+				swal({
+					title: "ทำการลบเรียบร้อยแล้ว!",
+					text: "ข้อมูลที่คุณเลือกถูกลบแล้ว",
+					confirmButtonColor: "#66BB6A",
+					type: "success"
+				});
+
+			} else {
+				swal({
+					title: "ยกเลิกการลบ",
+					text: "ข้อมูลที่คุณเลือกยังไม่ถูกลบ :)",
+					confirmButtonColor: "#2196F3",
+					type: "error"
+				});
+			}
+		});
+	}
+
 	function init(){
 		listData()
 	}
@@ -264,13 +332,81 @@ app.controller('menuController', function ($scope,dataService,API_URL) {
 	init();
 });
 
-app.controller('menuFormControl', function ($scope,dataService,API_URL) {
+app.controller('menuFormController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#menu-menu").addClass('active');
+	
 	if(data){
 		$scope.data = data;
-		$scope.data.role += "";
 	}else{
 		$scope.data = {};
-		$scope.data.role = "1"
+	}
+
+	$scope.add = function(data){
+		console.log(data);
+		dataService.postData("/admin/menu/add",data).then(function(res){
+			if(res.data.result){
+				alert("success")
+				window.location = API_URL+"/admin/menu";
+			}else{
+				alert("Fail")
+			}
+		})
+	}
+
+	function init(){
+		
+	}
+
+	init();
+});
+
+
+app.controller('booksController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#books-menu").addClass('active');
+
+	function listData(){
+		dataService.getData("/admin/room/list").then(function(res){
+			$scope.data = res.data;
+		})
+	}
+
+	$scope.form = function(){
+		window.location = API_URL+"/admin/room/form";
+	}
+
+	$scope.delete = function(id){
+		dataService.getData("/admin/room/delete/"+id).then(function(res){
+			console.log(res)
+			if(res.data.result){
+				alert("success")
+			}else{
+				alert("failed")
+			}
+			listData();
+		})
+	}
+
+	function init(){
+		listData()
+	}
+
+	init();
+});
+
+
+app.controller('booksFormController', function ($scope,dataService,API_URL) {
+	//- Active Menu
+	$("#sidebar > ul > li").removeClass('active');
+	$("#books-menu").addClass('active');
+	
+	if(data){
+		$scope.data = data;
+	}else{
+		$scope.data = {};
 	}
 
 	$scope.add = function(data){

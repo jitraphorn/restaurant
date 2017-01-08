@@ -1,5 +1,4 @@
-@extends('../admin.layout.master')
-@section('main')
+<?php $__env->startSection('main'); ?>
 <script type="text/javascript">
   var data = <?= json_encode($data);?>
 </script>
@@ -57,8 +56,9 @@
 
     <!-- Button -->
     <div align="center">
-      <button type="submit" class="btn btn-success"><i class="icon-checkmark4"></i> ตกลง</button> <a class="btn btn-default" href="/admin/menu"><i class="icon-exit2"></i> ยกเลิก</a>
+      <button type="submit" class="btn btn-success"><i class="icon-checkmark4"></i> ตกลง</button> <a class="btn btn-default" href="/admin/room"><i class="icon-exit2"></i> ยกเลิก</a>
     </div>
   </form>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../admin.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

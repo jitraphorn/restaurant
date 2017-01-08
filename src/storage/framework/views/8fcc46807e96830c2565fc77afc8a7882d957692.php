@@ -1,14 +1,13 @@
-@extends('../admin.layout.master')
-@section('main')
-<div ng-controller="userController">
+<?php $__env->startSection('main'); ?>
+<div ng-controller="booksController">
 	<div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header"><i class="fa fa-user"></i>ผู้ใช้งาน</h3>
-			<a class="btn btn-success" href="/admin/user/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
+			<h3 class="page-header"><i class="icon-book3"></i>การจองห้องพัก</h3>
+			<a class="btn btn-success" href="/admin/books/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
-				<li><i class="fa fa-user"></i>ผู้ใช้งาน</li>                
+				<li><i class="icon-book3"></i>การจองห้องพัก</li>                
 			</ol>
 		</div>
 	</div>
@@ -39,4 +38,5 @@
 			</table>
 		</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../admin.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

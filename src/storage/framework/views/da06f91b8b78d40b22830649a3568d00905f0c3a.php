@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="mainControl as mainCtrl">
+<html lang="en" ng-app="app" ng-controller="mainController as mainCtrl">
 <head>
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {

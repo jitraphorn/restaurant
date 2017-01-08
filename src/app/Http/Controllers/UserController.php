@@ -27,7 +27,7 @@ class UserController extends Controller {
 
 				$users = user::where('username',$data['username'])->where('password',md5($data['password']))->first();
 				
-				$_COOKIE['auth'] = $users;
+				setcookie("auth", json_encode($users), time() + (86400 * 30), "/"); // 86400 = 1 day
 				return ["result"=>true,'detail'=>$users];
 				
 

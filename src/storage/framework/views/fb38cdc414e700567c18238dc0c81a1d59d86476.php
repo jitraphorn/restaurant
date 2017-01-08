@@ -1,13 +1,13 @@
 <?php $__env->startSection('main'); ?>
-<div ng-controller="userControl">
+<div ng-controller="userController">
 	<div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header"><i class="fa fa-user"></i>ผู้ใช้งาน</h3>
-			<button class="btn btn-success" ng-click="form()" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</button>
+			<a class="btn btn-success" href="/admin/user/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-				<li><i class="fa fa-laptop"></i>User</li>                
+				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
+				<li><i class="fa fa-laptop"></i>ผู้ใช้งาน</li>                
 			</ol>
 		</div>
 	</div>
