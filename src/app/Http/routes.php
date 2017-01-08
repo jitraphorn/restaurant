@@ -62,3 +62,5 @@ Route::get('/admin/books/form', 'BookingController@form');
 Route::get('/admin/books/form/{id}', 'BookingController@form');
 Route::post('/admin/books/add', 'BookingController@add');
 Route::get('/admin/books/delete/{id}', 'BookingController@delete');
+
+Route::post('/admin/file/add', 'FileController@add');

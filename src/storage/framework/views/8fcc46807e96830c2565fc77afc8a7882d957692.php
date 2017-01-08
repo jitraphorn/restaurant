@@ -17,22 +17,24 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>ชื่อผู้ใช้</th>
-						<th>ชื่อ-นามสกุล</th>
-						<th>อีเมล</th>
-						<th>หน้าที่</th>
+						<th>รหัสการจอง</th>
+						<th>ชื่อห้องพัก</th>
+						<th>ราคารวม</th>
+						<th>เช็คอิน - เช็คเอาท์</th>
+						<th>สถานะ</th>
 						<th class="text-center">ตัวเลือก</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="x in data">
-					<td>{{$index+1}}</td>
-						<td>{{x.username}}</td>
-						<td>{{x.name}}</td>
-						<td>{{x.email}}</td>
-						<td ng-if="x.role == 1 || x.role == '1'">เจ้าของกิจการ</td>
-						<td ng-if="x.role == 2 || x.role == '2'">พนักงาน</td>
-						<td class="text-center"><a class="btn btn-warning" href="/admin/user/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
+						<td>{{$index+1}}</td>
+						<td>{{x.code}}</td>
+						<td>{{x.roomDetail.name}}</td>
+						<td>{{x.price | number:2}}</td>
+						<td>{{x.checkin_date}} - {{x.checkout_date}}</td>
+						<td ng-if="x.status == 1 || x.status == '1'">รออนุมัติ</td>
+						<td ng-if="x.status == 2 || x.status == '2'">อนุมัติแล้ว</td>
+						<td class="text-center"><a class="btn btn-warning" href="/admin/books/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
 					</tr>
 				</tbody>
 			</table>

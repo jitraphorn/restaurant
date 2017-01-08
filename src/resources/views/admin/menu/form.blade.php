@@ -44,7 +44,7 @@
     <!-- Image -->
     <div class="form-group col-md-12">
       <label for="inp">อัพโหลดรูปภาพ</label>
-      <input id="inp" type="file" name="image" accept="image/*"/><br/>
+      <input id="inp" type="file" name="image[]" accept="image/*"/><br/>
       <label ng-if="previewImg">รูปภาพใหม่</label>
       <p align="center" style="display:none;margin-top:15px;" class="preloadImg"><i class="icon-spinner2 spinner fa-2x"></i> กำลังโหลด . . .</p><img id="img" src="{{previewImg}}" style="margin-top:15px;" ng-if="previewImg" class="img-responsive"/>
     </div>

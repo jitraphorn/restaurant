@@ -229,15 +229,19 @@ app.controller('roomFormController', function ($scope,dataService,API_URL) {
 	}
 
 	$scope.add = function(data){
-		console.log(data);
-		dataService.postData("/admin/room/add",data).then(function(res){
-			if(res.data.result){
-				alert("success")
-				window.location = API_URL+"/admin/room";
-			}else{
-				alert("Fail")
+		var form = document.forms.namedItem("dataForm");
+		var oData = new FormData(form);
+		oData.append('folder',"room");
+		$.ajax({
+			type:'POST',
+			url: API_URL + '/admin/file/add',
+			data: oData,
+			processData: false,
+			contentType: false,
+			success: function (res){
+				console.log(res)
 			}
-		})
+		});
 	}
 
 	$scope.addImage = function(){
