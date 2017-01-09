@@ -1956,4 +1956,21 @@ form label {
   }
 }
 
+#activities > option {
+  color:#000 !important;
+}
+
+.table-active{
+  background-color: red;
+  color:white;
+}
+
+.tableZ{
+  min-height:70px;border:1px solid #000;position:relative;cursor: pointer;
+}
+
+.table-selected{
+  background-color: green;
+  color:white;
+}
 /*# sourceMappingURL=style.css.map */

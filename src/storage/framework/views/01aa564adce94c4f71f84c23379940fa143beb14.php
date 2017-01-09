@@ -43,20 +43,20 @@
     <!-- Image -->
     <div class="form-group col-md-12">
       <label for="inp">อัพโหลดรูปภาพ</label>
-      <input id="inp" type="file" name="image" accept="image/*"/><br/>
+      <input id="inp" type="file" name="image[]" accept="image/*"/><br/>
       <label ng-if="previewImg">รูปภาพใหม่</label>
-      <p align="center" style="display:none;margin-top:15px;" class="preloadImg"><i class="icon-spinner2 spinner fa-2x"></i> กำลังโหลด . . .</p><img id="img" src="{{previewImg}}" style="margin-top:15px;" ng-if="previewImg" class="img-responsive"/>
+      <p align="center" style="display:none;margin-top:15px;" class="preloadImg"><i class="icon-spinner2 fa-spin fa-2x"></i> กำลังโหลด . . .</p><img id="img" src="{{previewImg}}" style="margin-top:15px;" ng-if="previewImg" class="img-responsive"/>
     </div>
     <div class="clearfix"></div>
     <div class="form-group col-md-12">
-      <label>รูปภาพปัจจุบัน</label><img ng-if="data.path" src="{{data.path}}" class="img-responsive"/>
-      <p ng-if="!data.path" class="alert alert-info">ยังไม่มีรูปภาพ</p>
+      <label>รูปภาพปัจจุบัน</label><img ng-if="data.image" src="{{data.image}}" class="img-responsive"/>
+      <p ng-if="!data.image" class="alert alert-info">ยังไม่มีรูปภาพ</p>
     </div>
     <div class="clearfix"></div>
 
     <!-- Button -->
     <div align="center">
-      <button type="submit" class="btn btn-success"><i class="icon-checkmark4"></i> ตกลง</button> <a class="btn btn-default" href="/admin/room"><i class="icon-exit2"></i> ยกเลิก</a>
+      <button type="submit" class="btn btn-success"><i class="icon-checkmark4"></i> ตกลง</button> <a class="btn btn-default" href="/admin/menu"><i class="icon-exit2"></i> ยกเลิก</a>
     </div>
   </form>
 </div>

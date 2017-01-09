@@ -32,6 +32,7 @@ app.service('dataService', function($http,API_URL) {
 
 //- postData
     postData: function(api,data){
+      delete data.$$hashKey;
       return $http({
         method:'POST',
         url:API_URL+api,

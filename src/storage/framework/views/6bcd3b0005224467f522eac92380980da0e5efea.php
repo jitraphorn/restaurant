@@ -29,7 +29,7 @@
             <td>{{x.title}}</td>
             <td ng-if="x.type == 1 || x.type == '1'">เตียงเดี่ยว</td>
             <td ng-if="x.type == 2 || x.type == '2'">เตียงคู่</td>
-            <td>{{x.price}}</td>
+            <td>{{x.price | number:2}}</td>
             <td class="text-center"><a class="btn btn-warning" href="/admin/room/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
           </tr>
         </tbody>

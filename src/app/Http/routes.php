@@ -48,6 +48,8 @@ Route::get('/admin/room/form', 'RoomController@form');
 Route::get('/admin/room/form/{id}', 'RoomController@form');
 Route::post('/admin/room/add', 'RoomController@add');
 Route::get('/admin/room/delete/{id}', 'RoomController@delete');
+Route::get('/admin/room/image/delete/{id}', 'RoomController@ImageDelete');
+Route::get('/admin/room/image/list/{id}', 'RoomController@listsImage');
 
 Route::get('/admin/menu', 'MenuController@index');
 Route::get('/admin/menu/list', 'MenuController@lists');
@@ -62,5 +64,10 @@ Route::get('/admin/books/form', 'BookingController@form');
 Route::get('/admin/books/form/{id}', 'BookingController@form');
 Route::post('/admin/books/add', 'BookingController@add');
 Route::get('/admin/books/delete/{id}', 'BookingController@delete');
+
+Route::get('/admin/table', 'TableController@index');
+Route::get('/admin/table/list', 'TableController@lists');
+Route::post('/admin/table/add', 'TableController@add');
+Route::get('/admin/table/delete/{id}', 'TableController@delete');
 
 Route::post('/admin/file/add', 'FileController@add');

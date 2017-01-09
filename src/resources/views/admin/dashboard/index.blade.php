@@ -1,6 +1,6 @@
 @extends('../admin.layout.master')
 @section('main')
-<div ng-controller="userController">
+<div ng-controller="dashboardController">
 	<div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header"><i class="fa fa-home"></i>หน้าแรก</h3>

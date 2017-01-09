@@ -34,10 +34,14 @@ class MenuController extends Controller {
 
 	public function add(Request $request){
 		$data = $request::all();
-		if(!$data['id']){
+		$data['image'] = $data['image'][0];
+		if(!isset($data['id'])){
 			$result = menu::insert($data); 
 		}else{
 			$table = menu::where('id', $data['id']);
+			if(!$data['image'] || !isset($data['image'])){
+				unset($data['image']);
+			}
             $result = $table->update($data);
 		}
 		return ['result'=>$result];

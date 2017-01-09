@@ -25,10 +25,11 @@
         </thead>
         <tbody>
           <tr ng-repeat="x in data">
-          <td>{{$index+1}}</td>
-            <td><img src="https://dummyimage.com/50x50/000/fff"></td>
-            <td>{{x.title}}</td>
-            <td>{{x.price}}</td>
+            <td>{{$index+1}}</td>
+            <td ng-if="!x.image"><img src="https://dummyimage.com/50x50/000/fff"></td>
+            <td><img src="{{x.image}}" ng-if="x.image" style="width:50px;height:50px;"></td>
+            <td>{{x.name}}</td>
+            <td>{{x.price | number:2}}</td>
             <td class="text-center"><a class="btn btn-warning" href="/admin/menu/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
           </tr>
         </tbody>

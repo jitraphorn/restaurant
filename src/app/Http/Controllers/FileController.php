@@ -19,19 +19,21 @@ class FileController extends Controller {
 		$files = $_FILES['image'];
 		$arrImg = [];
 		foreach ($files['name'] as $key => $value) {
-			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-			$charactersLength = strlen($characters);
-			$randomString = '';
-			for ($i = 0; $i < 6; $i++) {
-				$randomString .= $characters[rand(0, $charactersLength - 1)];
+			if($files['error'][$key] == 0){
+				$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+				$charactersLength = strlen($characters);
+				$randomString = '';
+				for ($i = 0; $i < 6; $i++) {
+					$randomString .= $characters[rand(0, $charactersLength - 1)];
+				}
+
+				$path_save = "assets/images/upload/".$folder."/";
+
+				$name = $randomString."-".$files['name'][$key];
+				$tmp_name = $files['tmp_name'][$key];
+				move_uploaded_file($tmp_name,$path_save.$name);
+				array_push($arrImg, "/".$path_save.$name);
 			}
-
-			$path_save = "assets/images/upload/".$folder."/";
-
-			$name = $randomString."-".$files['name'][$key];
-			$tmp_name = $files['tmp_name'][$key];
-			move_uploaded_file($tmp_name,$path_save.$name);
-			array_push($arrImg, $path_save.$name);
 		}
 
 		return $arrImg;

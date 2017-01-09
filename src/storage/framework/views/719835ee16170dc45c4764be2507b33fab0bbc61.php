@@ -63,8 +63,8 @@
 				<input type="file" name="image[]" accept="image/*"/>
 			</div>
 			<div class="clearfix"></div>
-			<div ng-repeat="x in dataImage" class="col-md-6 form-group" ng-if="dataImage">
-				<button type="button" style="position:absolute;top:0;right:10px;" ng-click="deleteImage(x)"><i class="icon-bin"></i></button><img src="{{x.path}}" class="img-responsive"/>
+			<div ng-repeat="x in data.image" class="col-md-6 form-group" ng-if="data.image">
+				<button ng-if="x.id" type="button" style="position:absolute;top:0;right:15px;" ng-click="deleteImage(x.id)"><i class="icon-bin"></i></button><img src="{{x.path}}" class="img-responsive"/>
 			</div>
 		</div>
 		<div class="clearfix"></div>

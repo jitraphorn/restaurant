@@ -7,7 +7,7 @@
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
-				<li><i class="fa fa-laptop"></i>ผู้ใช้งาน</li>                
+				<li><i class="fa fa-user"></i>ผู้ใช้งาน</li>                
 			</ol>
 		</div>
 	</div>
