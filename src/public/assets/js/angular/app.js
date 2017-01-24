@@ -79,5 +79,4 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 
 app.controller('homeController', function ($scope, $http,$timeout,dataService) {
 	console.log("home")
-
 });
