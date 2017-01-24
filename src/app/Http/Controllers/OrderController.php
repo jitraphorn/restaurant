@@ -25,6 +25,7 @@ class OrderController extends Controller {
 		foreach ($order as $key => $value) {
 			$order[$key]['customer_detail'] = customer::where('id',$value['customer_id'])->first();
 			$order[$key]['table_detail'] = table::where('id',$value['table_id'])->first();
+			$order[$key]['menu_list'] = menu_list::where('order_id',$value['id'])->get();
 		}
 		return $order;
 	}
