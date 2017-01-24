@@ -1,41 +1,65 @@
 @extends('../admin.layout.master')
 @section('main')
-<div class="row">
-        <div class="col-lg-12">
-          <h3 class="page-header"><i class="fa fa-laptop"></i>User</h3>
-          <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-            <li><i class="fa fa-laptop"></i>User</li>                
-          </ol>
-        </div>
-      </div>
-<div class="container" ng-controller="userControl">
-<button class="btn btn-default" ng-click="form()" style='float:right'>ADD</button>           
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <td>#</td>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Name</th>
-        <th>E-Mail</th>
-        <th>role</th>
-        <th>edit</th>
-        <th>delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="x in data">
-      <td>{{$index+1}}</td>
-        <td>{{x.username}}</td>
-        <td>{{x.password}}</td>
-        <td>{{x.name}}</td>
-        <td>{{x.email}}</td>
-        <td>{{x.role}}</td>
-        <td><a href="/admin/user/form/{{x.id}}">edit</a></td>
-        <td><a href="javascript:void(0)" ng-click="delete(x.id)">delete</a></td>
-      </tr>
-    </tbody>
-  </table>
+<div ng-controller="orderController">
+	<div class="row">
+		<div class="col-lg-12">
+			<h3 class="page-header"><i class="icon-icon-chair"></i>การจองโต๊ะอาหาร</h3>
+			<button class="btn btn-success" ng-click="form()" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</button>
+			<div class="clearfix"></div>
+			<ol class="breadcrumb">
+				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
+				<li><i class="icon-icon-chair"></i>การจองโต๊ะอาหาร</li>                
+			</ol>
+		</div>
+	</div>
+		<h3 class="alert alert-info" align="center" ng-show="!data.length">ยังไม่มีข้อมูล</h3>
+		<div class="table-responsive" ng-show="data.length">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>ชื่อโต๊ะ</th>
+						<th>ชื่อผู้จอง</th>
+						<th>จำนวนคน</th>
+						<th>เวลา</th>
+						<th>สถานะ</th>
+						<th class="text-center">ตัวเลือก</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in data">
+						<td>{{$index+1}}</td>
+						<td>{{x.table_detail.name}}</td>
+						<td>{{x.customer_detail.fname + x.customer_detail.lname}}</td>
+						<td>{{x.person}}</td>
+						<td>{{x.datetime}}</td>
+						<td>{{x.status == 0 ? 'ยังไม่ได้ชำระเงิน':'ชำระเงินเรียบร้อยแล้ว'}}</td>
+						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-eye"></i> ดูข้อมูล</button> <button class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form ng-submit="submit(formData)">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">ข้อมูล JSON (ชั่วคราว)</h4>
+						</div>
+						<div class="modal-body">
+<pre>
+{{jsonx}}
+</pre>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-cross"></i> ปิด</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 </div>
 @endsection

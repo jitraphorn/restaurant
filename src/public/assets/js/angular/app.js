@@ -7,19 +7,18 @@ app.config(function($httpProvider){
 app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 	console.log("main")
 	$scope.tableData = {};
+
 	$scope.tableReservation = function(data){
 		var date = moment($('#date').data("DateTimePicker").date()).format('YYYY-MM-DD')
 		var time = moment($('#time').data("DateTimePicker").date()).format('HH:mm:ss')
 		data.datetime = date + " " + time;
-		console.log(data)
-		dataService.getData("/admin/table/list").then(function(res){
+		dataService.getData("/api/table/list").then(function(res){
 			$scope.listTable = res.data;
 			$('#tableModal').modal("show")
 		})
 	}
 
 	$scope.selectTable = function(data){
-		console.log(data)
 		if(data.status == '1'){
 			$('.tableZ').removeClass('table-selected');
 			$('#tableZ'+data.id).addClass('table-selected');
@@ -31,7 +30,49 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 	}
 
 	$scope.submitTableReservation = function(data){
-		alert("Comming Soon!")
+		data.type = "C";
+		let json = {order:$scope.tableData,customer:data}
+		console.log(json);
+		dataService.postData("/api/order/add",json).then(function(res){
+			console.log(res.data.result);
+			if(confirm('ต้องการเลือกรายการอาหารหรือไม่?')){
+				$('#tableModal').modal("hide")
+				$timeout(function() {
+					menuOrder(res.data.result);
+				}, 500);
+			}else{
+				$('#tableModal').modal("hide")
+				alert("ทำรายการสำเร็จแล้ว!")
+			}
+		})
+	}
+
+	function menuOrder(orderId){
+		$scope.menu_list = [];
+		$scope.order_id = orderId;
+		dataService.getData("/api/menu/list").then(function(res){
+			$scope.listMenu = res.data;
+			$('#menuModal').modal("show")
+		})
+	}
+
+	$scope.submitMenu = function(){
+		var menu_list = [];
+		console.log($scope.menu_list)
+		angular.forEach($scope.menu_list, function(amount, key) {
+			if(amount > 0){
+				menu_list.push({menu_id:key,amount:amount,order_id:$scope.order_id});
+			}
+
+		});
+		console.log(menu_list)
+		dataService.postData("/api/order/addMenuList",{data:menu_list}).then(function(res){
+			if(res.data.result){
+				$('#menuModal').modal("hide");
+				alert("ทำรายการสำเร็จแล้ว!")
+			}
+		})
+
 	}
 
 });

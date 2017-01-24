@@ -570,4 +570,39 @@ app.controller('tableController', function ($scope, $http,$timeout,dataService) 
 });
 
 
+app.controller('orderController', function ($scope, $http,$timeout,dataService) {
+	console.log("order")
+	function listData(){
+		dataService.getData("/admin/order/list").then(function(res){
+			$scope.data = res.data;
+			$scope.data.status += "";
+		})
+	}
+
+	$scope.form = function(data){
+		delete data.$$hashKey;
+		$scope.jsonx = JSON.stringify(data, null, 6);
+		$('#formModal').modal('show');	
+	}
+
+	$scope.delete = function(id){
+		dataService.getData("/admin/order/delete/"+id).then(function(res){
+			console.log(res)
+			if(res.data.result){
+				alert("success")
+			}else{
+				alert("failed")
+			}
+			listData();
+		})
+	}
+
+	function init(){
+		listData();
+	}
+
+	init();
+});
+
+
 

@@ -22,6 +22,7 @@ Route::get('/service', function () {
     return view('service.index');
 });
 
+//- backend
 Route::get('/admin/login', 'UserController@login');
 Route::post('/admin/checkLogin', 'UserController@checkLogin');
 
@@ -70,4 +71,17 @@ Route::get('/admin/table/list', 'TableController@lists');
 Route::post('/admin/table/add', 'TableController@add');
 Route::get('/admin/table/delete/{id}', 'TableController@delete');
 
+Route::get('/admin/order', 'OrderController@index');
+Route::get('/admin/order/list', 'OrderController@lists');
+Route::get('/admin/order/form', 'OrderController@form');
+Route::get('/admin/order/form/{id}', 'OrderController@form');
+Route::post('/admin/order/add', 'OrderController@add');
+Route::get('/admin/order/delete/{id}', 'OrderController@delete');
+
 Route::post('/admin/file/add', 'FileController@add');
+
+//- fontend
+Route::get('/api/table/list', 'TableController@lists');
+Route::post('/api/order/add', 'OrderController@add');
+Route::post('/api/order/addMenuList', 'OrderController@addMenuList');
+Route::get('/api/menu/list', 'MenuController@lists');
