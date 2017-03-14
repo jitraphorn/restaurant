@@ -100,7 +100,8 @@ thead{
   background-size: cover;
 }
 .login-img3-body{
-  background: url('/assets/images/admin/bg-1.jpg') no-repeat center center fixed; 
+    background: #141e2b;
+  /*background: url('/assets/images/admin/bg-1.jpg') no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -109,7 +110,7 @@ thead{
 
 .login-form {
     max-width: 350px;
-    margin: 200px auto 0;
+    margin: 150px auto 0;
     background: #d5d7de;    
 }
 .login-img-body .login-form{
@@ -4974,4 +4975,8 @@ span.customSelect.changed {
 }
 .customSelectInner {
     background:url(/assets/images/admin/customSelect-arrow.gif) no-repeat center right;
+}
+
+div.sweet-alert.showSweetAlert.visible > h2{
+    margin-top:30px;
 }

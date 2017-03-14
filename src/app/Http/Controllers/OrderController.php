@@ -17,14 +17,15 @@ class OrderController extends Controller {
 	}
 
 	public function index(){
-		return view('admin.order.index');
+		$data =[];
+		$data['tableList'] = table::get();
+		return view('admin.order.index',array('data' => $data));
 	}
 
 	public function lists(){
 		$order = order::get();
 		foreach ($order as $key => $value) {
 			$order[$key]['customer_detail'] = customer::where('id',$value['customer_id'])->first();
-			$order[$key]['table_detail'] = table::where('id',$value['table_id'])->first();
 			$order[$key]['menu_list'] = menu_list::where('order_id',$value['id'])->get();
 		}
 		return $order;
@@ -67,5 +68,11 @@ class OrderController extends Controller {
 			return ['result'=>$result];
 		}
 		
+	}
+
+	public function update(Request $request){
+		$data = $request::all();
+		$result = order::where('id',$data['id'])->update($data);
+		return ['result'=>$result];
 	}
 }

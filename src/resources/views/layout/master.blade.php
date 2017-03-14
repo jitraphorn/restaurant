@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home - title</title>
 
-    <link href="{!! asset('https://fonts.googleapis.com/css?family=Lato:300,400,700') !!}" rel="stylesheet">
-    <link href="{!! asset('https://fonts.googleapis.com/css?family=Kaushan+Script') !!}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- Animate.css -->
     <link href="{!! asset('assets/css/animate.css') !!}" rel="stylesheet">
@@ -26,6 +25,8 @@
     <link href="{!! asset('assets/css/owl.theme.default.min.css') !!}" rel="stylesheet">
     <!-- Theme style  -->
     <link href="{!! asset('assets/css/style.css') !!}" rel="stylesheet">
+    <!-- Custom style  -->
+    <link href="{!! asset('assets/css/custom.css') !!}" rel="stylesheet">
     <!-- Modernizr JS -->
     <script type="text/javascript" src="{!! asset('assets/js/modernizr-2.6.2.min.js') !!}"></script>
 

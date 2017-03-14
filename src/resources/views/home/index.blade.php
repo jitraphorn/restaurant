@@ -14,90 +14,22 @@
 			</div>
 			<div class="row">
 
+
+			@foreach($data['menu'] as $menu)
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_1.jpg" class="fh5co-card-item image-popup">
+					<a href="{{%$menu->image%}}" class="fh5co-card-item image-popup">
 						<figure>
 							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_1.jpg" alt="Image" class="img-responsive">
+							<img src="{{%$menu->image%}}" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
-							<h2>เมนู 1</h2>
-							<p>รายละเอียดเมนู 1</p>
-							<p><span class="price cursive-font">35.00 บาท</span></p>
+							<h2>{{%$menu->name%}}</h2>
+							<p class="desc-menu">{{%$menu->description%}}</p>
+							<p><span class="price cursive-font">{{%$menu->price%}} บาท</span></p>
 						</div>
 					</a>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_2.jpg" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_2.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>เมนู 2</h2>
-							<p>รายละเอียดเมนู 2</p>
-							<p><span class="price cursive-font">35.00 บาท</span></p>
-						</div>
-					</a>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_3.jpg" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_3.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>เมนู 3</h2>
-							<p>รายละเอียดเมนู 3</p>
-							<p><span class="price cursive-font">35.00 บาท</span></p>
-
-						</div>
-					</a>
-				</div>
-
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_4.jpg" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_4.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>เมนู 4</h2>
-							<p>รายละเอียดเมนู 4</p>
-							<p><span class="price cursive-font">45.00 บาท</span></p>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_5.jpg" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_5.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>เมนู 5</h2>
-							<p>รายละเอียดเมนู 5</p>
-							<p><span class="price cursive-font">50.00 บาท</span></p>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="assets/images/img_6.jpg" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="assets/images/img_6.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>เมนู 6</h2>
-							<p>รายละเอียดเมนู 6</p>
-							<p><span class="price cursive-font">40.00 บาท</span></p>
-						</div>
-					</a>
-				</div>
-
+			@endforeach
 			</div>
 		</div>
 	</div>
@@ -157,7 +89,7 @@
 		</div>
 	</div>
 
-	<div id="gtco-counter" class="gtco-section">
+	<!-- <div id="gtco-counter" class="gtco-section">
 		<div class="gtco-container">
 
 			<div class="row">
@@ -198,6 +130,6 @@
 
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 @endsection

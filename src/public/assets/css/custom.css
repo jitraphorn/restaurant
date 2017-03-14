@@ -1,0 +1,12 @@
+.desc-menu{
+	height: 54px;
+	overflow: hidden;
+}
+
+select option {
+    color: #000 !important;
+}
+
+.table > tbody > tr > td {
+	vertical-align: middle !important;
+}

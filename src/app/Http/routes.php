@@ -14,13 +14,9 @@ Blade::setContentTags('{{{%', '%}}}');
 |
 */
 
-Route::get('/', function () {
-    return view('home.index');
-});
-
-Route::get('/service', function () {
-    return view('service.index');
-});
+Route::get('/', 'ViewController@home');
+Route::get('/room', 'ViewController@room');
+Route::get('/food_menu', 'ViewController@food_menu');
 
 //- backend
 Route::get('/admin/login', 'UserController@login');
@@ -54,6 +50,7 @@ Route::get('/admin/room/image/list/{id}', 'RoomController@listsImage');
 
 Route::get('/admin/menu', 'MenuController@index');
 Route::get('/admin/menu/list', 'MenuController@lists');
+Route::get('/admin/menu/view/{id}', 'MenuController@view');
 Route::get('/admin/menu/form', 'MenuController@form');
 Route::get('/admin/menu/form/{id}', 'MenuController@form');
 Route::post('/admin/menu/add', 'MenuController@add');
@@ -77,6 +74,7 @@ Route::get('/admin/order/form', 'OrderController@form');
 Route::get('/admin/order/form/{id}', 'OrderController@form');
 Route::post('/admin/order/add', 'OrderController@add');
 Route::get('/admin/order/delete/{id}', 'OrderController@delete');
+Route::post('/admin/order/update', 'OrderController@update');
 
 Route::post('/admin/file/add', 'FileController@add');
 

@@ -296,11 +296,10 @@
 	var dateTimeForm = function() {
 		// $('#date-start').datepicker();
 		$('#date').datetimepicker({
-         format: 'DD/MM/YYYY'
+         format: 'DD/MM/YYYY',
+         minDate:new Date(),
+         defaultDate:new Date()
      	});
-		$('#time').datetimepicker({
-			format: 'LT'	
-		});
 
 		
 	};

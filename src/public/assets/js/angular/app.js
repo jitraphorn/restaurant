@@ -7,26 +7,11 @@ app.config(function($httpProvider){
 app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 	console.log("main")
 	$scope.tableData = {};
+	$scope.tableData.date = moment(new Date()).format('YYYY-MM-DD')
 
-	$scope.tableReservation = function(data){
-		var date = moment($('#date').data("DateTimePicker").date()).format('YYYY-MM-DD')
-		var time = moment($('#time').data("DateTimePicker").date()).format('HH:mm:ss')
-		data.datetime = date + " " + time;
-		dataService.getData("/api/table/list").then(function(res){
-			$scope.listTable = res.data;
-			$('#tableModal').modal("show")
-		})
-	}
-
-	$scope.selectTable = function(data){
-		if(data.status == '1'){
-			$('.tableZ').removeClass('table-selected');
-			$('#tableZ'+data.id).addClass('table-selected');
-			$scope.tableData.table_id = data.id;
-		}else{
-			alert("โต๊ะที่คุณเลือกยังไม่ว่างในตอนนี้")
-		}
-		
+	$scope.tableReservation = function(){
+		$scope.tableData.date = moment($('#date').data("DateTimePicker").date()).format('YYYY-MM-DD')
+		$('#tableModal').modal("show")
 	}
 
 	$scope.submitTableReservation = function(data){
@@ -79,4 +64,18 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 
 app.controller('homeController', function ($scope, $http,$timeout,dataService) {
 	console.log("home")
+});
+
+app.controller('roomController', function ($scope, $http,$timeout,dataService) {
+	console.log("room")
+	$scope.slide = [];
+	$scope.click_item = function(image){
+		console.log(image)
+		$scope.slide = image;
+		$('.slide-modal').modal("show");
+	}
+});
+
+app.controller('foodController', function ($scope, $http,$timeout,dataService) {
+	console.log("food")
 });

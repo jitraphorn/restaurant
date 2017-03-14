@@ -1,5 +1,9 @@
 @extends('../admin.layout.master')
 @section('main')
+<script type="text/javascript">
+	var tableList = <?php echo json_encode($data['tableList']);?>;
+	console.log(tableList)
+</script>
 <div ng-controller="orderController">
 	<div class="row">
 		<div class="col-lg-12">
@@ -23,6 +27,7 @@
 						<th>จำนวนคน</th>
 						<th>เวลา</th>
 						<th>สถานะ</th>
+						<th>โต๊ะ</th>
 						<th class="text-center">ตัวเลือก</th>
 					</tr>
 				</thead>
@@ -34,6 +39,12 @@
 						<td>{{x.person}}</td>
 						<td>{{x.datetime}}</td>
 						<td>{{x.status == 0 ? 'ยังไม่ได้ชำระเงิน':'ชำระเงินเรียบร้อยแล้ว'}}</td>
+						<td>
+							<select class="form-control" ng-model="data[$index].table_id" convert-to-number ng-change="changeTable(x.id,data[$index].table_id)">
+								<option value="">ยังไม่มี</option>
+								<option value="{{t.id}}" ng-repeat="t in tableList">{{t.name}}</option>
+							</select>
+						</td>
 						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-eye"></i> ดูข้อมูล</button> <button class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</button></td>
 					</tr>
 				</tbody>

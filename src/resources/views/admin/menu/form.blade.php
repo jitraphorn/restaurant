@@ -50,7 +50,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="form-group col-md-12">
-      <label>รูปภาพปัจจุบัน</label><img ng-if="data.image" src="{{data.image}}" class="img-responsive"/>
+      <label>รูปภาพปัจจุบัน</label><img ng-if="data.image.length" src="{{data.image}}" class="img-responsive"/>
       <p ng-if="!data.image" class="alert alert-info">ยังไม่มีรูปภาพ</p>
     </div>
     <div class="clearfix"></div>

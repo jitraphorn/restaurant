@@ -1,4 +1,4 @@
-<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
+<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(./assets/images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
 	<div class="gtco-container">
 		<div class="row">
@@ -17,18 +17,11 @@
 								<div class="tab-content">
 									<div class="tab-content-inner active" data-content="signup">
 										<h3 class="cursive-font">จองโต๊ะและรายการอาหาร</h3>
-										<form ng-submit="tableReservation(tableData)">
+										<form ng-submit="tableReservation()">
 											<div class="row form-group">
 												<div class="col-md-12">
 													<label for="activities">จำนวนคน</label>
-													<select name="#" id="activities" class="form-control" ng-model="tableData.person">
-														<option value="">จำนวนคน</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5+</option>
-													</select>
+													<input type="number" class="form-control" ng-model="tableData.person" ng-init="tableData.person = 1">
 												</div>
 											</div>
 											<div class="row form-group">
@@ -40,7 +33,12 @@
 											<div class="row form-group">
 												<div class="col-md-12">
 													<label for="date-start">เวลา</label>
-													<input type="text" id="time" class="form-control">
+													<select class="form-control" ng-model="tableData.time" ng-init="tableData.time = '9.00น. - 12.00น.'">
+														<option value="9.00น. - 12.00น.">9.00น. - 12.00น.</option>
+														<option value="12.00น. - 15.00น.">12.00น. - 15.00น.</option>
+														<option value="12.00น. - 18.00น.">15.00น. - 18.00น.</option>
+														<option value="18.00น. - 21.00น.">18.00น. - 21.00น.</option>
+													</select>
 												</div>
 											</div>
 
@@ -74,15 +72,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">จองโต๊ะอาหาร</h4>
 				</div>
-				<div class="modal-body" style="display:inline-block;">
-					<div style="height:15px;width:15px;background:#fff;border:1px solid #000;display:inline-block;"></div> <span>ว่าง</span> 
-					<div style="height:15px;width:15px;background:red;border:1px solid #000;display:inline-block;"></div> <span>ไม่ว่าง</span>
-					<div style="height:15px;width:15px;background:green;border:1px solid #000;display:inline-block;"></div> <span>กำลังเลือก</span>
-					<div class="clearfix"></div>
-					<div class="col-xs-3 tableZ" id="tableZ{{x.id}}" ng-repeat="x in listTable" ng-class="{'table-active':x.status == '2'}" ng-click="selectTable(x)">{{x.name}}<br>จำนวน {{x.seat}} ที่นั่ง
-					</div>
-					<div class="clearfix"></div>
-					<hr>
+				<div class="modal-body">
 					<h4>ข้อมูลผู้จอง</h4>
 					<div class="form-group col-md-6">
 						<label>ชื่อ</label>
@@ -138,14 +128,18 @@
 					<div class="table-responsive">
 						<table class="table">
 							<tr>
-								<th>ชื่อเมนู</th>
-								<th>ราคา</th>
-								<th>จำนวน</th>
+								<th class="text-center">รูปภาพ</th>
+								<th class="text-center">ชื่อเมนู</th>
+								<th class="text-center">ราคา</th>
+								<th style="max-width: 80px" class="text-center">จำนวน</th>
 							</tr>
 							<tr ng-repeat="x in listMenu">
+								<td>
+									<img src="{{x.image}}" alt="Image" style="width:50px;height: 50px">
+								</td>
 								<td>{{x.name}}</td>
 								<td>{{x.price | number:2}}</td>
-								<td><input type="number" ng-model="menu_list[x.id]" ng-init="menu_list[x.id] = 0"></td>
+								<td style="max-width: 80px"><input type="number" class="form-control text-center" ng-model="menu_list[x.id]" ng-init="menu_list[x.id] = 0"></td>
 							</tr>
 						</table>
 					</div>

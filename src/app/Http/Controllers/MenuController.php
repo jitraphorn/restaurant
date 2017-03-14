@@ -32,19 +32,27 @@ class MenuController extends Controller {
 		return menu::get();
 	}
 
+	public function view($id){
+		return menu::where('id',$id)->first();
+	}
+
 	public function add(Request $request){
 		$data = $request::all();
-		$data['image'] = $data['image'][0];
+		if(isset($data['image'])){
+			$data['image'] = $data['image'][0];
+		}
 		if(!isset($data['id'])){
-			$result = menu::insert($data); 
+			$id = menu::insertGetId($data);
+			$result = $id?1:0;
 		}else{
 			$table = menu::where('id', $data['id']);
-			if(!$data['image'] || !isset($data['image'])){
+			if(!isset($data['image'])){
 				unset($data['image']);
 			}
             $result = $table->update($data);
+            $id = $data['id'];
 		}
-		return ['result'=>$result];
+		return ['result'=>$result,'id'=>$id];
 	}
 
 	public function delete($id = NULL){
