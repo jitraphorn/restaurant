@@ -9,7 +9,7 @@
 				<ul>
 					<li><a href="/food_menu">เมนูอาหาร</a></li>
 					<li class="has-dropdown">
-						<a href="services.html">บริการ</a>
+						<a href="#">บริการ</a>
 						<ul class="dropdown">
 							<li><a href="#">จองโต๊ะอาหาร</a></li>
 							<li><a href="/room">จองห้องพัก</a></li>
