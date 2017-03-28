@@ -28,8 +28,8 @@
         <tbody>
           <tr ng-repeat="x in data">
           <td>{{$index+1}}</td>
-            <td ng-if="x.type == 'c'">ทั่วไป</td>
-            <td ng-if="x.type == 'm'">สมาชิก</td>
+            <td ng-if="x.type == 'C'">ทั่วไป</td>
+            <td ng-if="x.type == 'M'">สมาชิก</td>
             <td>{{x.fname}} {{x.lname}}</td>
             <td>{{x.tel}}</td>
             <td>{{x.email}}</td>

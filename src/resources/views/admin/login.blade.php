@@ -21,6 +21,7 @@
     <!-- Custom styles -->
     <link href="{!! asset('assets/backend/css/style.css') !!}" rel="stylesheet">
     <link href="{!! asset('assets/backend/css/style-responsive.css') !!}" rel="stylesheet" />
+    <link href="{!! asset('assets/backend/css/sweetalert.css') !!}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
@@ -58,6 +59,7 @@
 
   </body>
   <script src="{!! asset('assets/backend/js/jquery.js') !!}"></script>
+  <script type="text/javascript" src="{!! asset('assets/backend/js/sweetalert.min.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/backend/angular/app.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('assets/backend/angular/service.js') !!}"></script>

@@ -68,11 +68,33 @@ app.controller('homeController', function ($scope, $http,$timeout,dataService) {
 
 app.controller('roomController', function ($scope, $http,$timeout,dataService) {
 	console.log("room")
+	var myDate = new Date();
+	$('#checkin_date').datetimepicker({
+		format: 'DD/MM/YYYY',
+		minDate:new Date(),
+		defaultDate:new Date()
+	});
+	$('#checkout_date').datetimepicker({
+		format: 'DD/MM/YYYY',
+		minDate:myDate.setDate(myDate.getDate() + 1),
+		defaultDate:myDate.setDate(myDate.getDate() + 1)
+	});
 	$scope.slide = [];
 	$scope.click_item = function(image){
-		console.log(image)
 		$scope.slide = image;
 		$('.slide-modal').modal("show");
+	}
+
+	$scope.reservation = function(){
+		$('#reservationModal').modal("show");
+	}
+
+	$scope.submitReservation = function(){
+		$scope.booking = {};
+		$scope.booking.checkin_date = moment($('#checkin_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
+		$scope.booking.checkout_date = moment($('#checkout_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
+		let json = {booking:$scope.booking, cusData:$scope.cusData}
+		console.log(json)
 	}
 });
 

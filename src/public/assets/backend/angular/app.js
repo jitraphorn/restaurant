@@ -664,7 +664,8 @@ app.controller('orderController', function ($scope, $http,$timeout,dataService) 
 
 	$scope.form = function(data){
 		delete data.$$hashKey;
-		$scope.jsonx = JSON.stringify(data, null, 6);
+		$scope.dataDetail = data;
+		console.log($scope.dataDetail)
 		$('#formModal').modal('show');	
 	}
 

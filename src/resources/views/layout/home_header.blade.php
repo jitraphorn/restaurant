@@ -92,7 +92,7 @@
 						<input type="text" class="form-control" ng-model="cusData.email">
 					</div>
 					<div class="clearfix"></div>
-					<div class="form-group col-md-12">
+<!-- 					<div class="form-group col-md-12">
 						<label>ที่อยู่</label>
 						<textarea class="form-control" ng-model="cusData.address"></textarea>
 					</div>
@@ -104,7 +104,7 @@
 							<option value="f">หญิง</option>
 						</select>
 					</div>
-					<div class="clearfix"></div>
+					<div class="clearfix"></div> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-cross"></i> ปิด</button>

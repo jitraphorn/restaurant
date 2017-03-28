@@ -8,6 +8,7 @@ use App\order as order; // add model
 use App\customer as customer; // add model
 use App\table as table; // add model
 use App\menu_list as menu_list;
+use App\menu as menu;
 use Request;
 
 class OrderController extends Controller {
@@ -25,8 +26,17 @@ class OrderController extends Controller {
 	public function lists(){
 		$order = order::get();
 		foreach ($order as $key => $value) {
+
 			$order[$key]['customer_detail'] = customer::where('id',$value['customer_id'])->first();
-			$order[$key]['menu_list'] = menu_list::where('order_id',$value['id'])->get();
+			$menu_list = menu_list::where('order_id',$value['id'])->get();
+
+			foreach ($menu_list as $key2 => $value2) {
+				$menu = menu::where('id',$value2['menu_id'])->first();
+				$menu_list[$key2]['menu_detail'] = $menu;
+			}
+
+			$order[$key]['menu_list'] = $menu_list;
+			$order[$key]['table_detail'] = table::where('id',$value['table_id'])->first();
 		}
 		return $order;
 	}
