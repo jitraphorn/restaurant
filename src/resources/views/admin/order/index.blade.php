@@ -72,7 +72,7 @@
 										<td><b>วันที่</b></td>
 										<td>{{dataDetail.date}}</td>
 										<td><b>เวลา</b></td>
-										<td>{{dataDetail.time}} คน</td>
+										<td>{{dataDetail.time}}</td>
 									</tr>
 									<tr>
 										<td><b>ชื่อคนจอง</b></td>
