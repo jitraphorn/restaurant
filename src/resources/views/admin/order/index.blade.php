@@ -1,14 +1,10 @@
 @extends('../admin.layout.master')
 @section('main')
-<script type="text/javascript">
-	var tableList = <?php echo json_encode($data['tableList']);?>;
-	console.log(tableList)
-</script>
 <div ng-controller="orderController">
 	<div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header"><i class="icon-icon-chair"></i>การจองโต๊ะอาหาร</h3>
-			<button class="btn btn-success" ng-click="form()" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</button>
+<!-- 			<button class="btn btn-success" ng-click="form()" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</button> -->
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
@@ -26,21 +22,19 @@
 						<th>จำนวนคน</th>
 						<th>เวลา</th>
 						<th>สถานะ</th>
-						<th>โต๊ะ</th>
 						<th class="text-center">ตัวเลือก</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="x in data">
+					<tr ng-repeat="x in data" ng-class="{'success': x.status == '1'}">
 						<td>{{$index+1}}</td>
 						<td>{{x.customer_detail.fname + x.customer_detail.lname}}</td>
 						<td>{{x.person}}</td>
-						<td>{{x.datetime}}</td>
-						<td>{{x.status == 0 ? 'ยังไม่ได้ชำระเงิน':'ชำระเงินเรียบร้อยแล้ว'}}</td>
+						<td>{{x.date + x.time}}</td>
 						<td>
-							<select class="form-control" ng-model="data[$index].table_id" convert-to-number ng-change="changeTable(x.id,data[$index].table_id)">
-								<option value="">ยังไม่มี</option>
-								<option value="{{t.id}}" ng-repeat="t in tableList">{{t.name}}</option>
+							<select class="form-control" convert-to-number ng-init="dummyStatus = x.status" ng-model="dummyStatus" ng-change="changeStatus(x.id,x.status)">
+								<option value="0" ng-selected="x.status == '0'">รออนุมัติ</option>
+								<option value="1" ng-selected="x.status == '1'">อนุมัติแล้ว</option>
 							</select>
 						</td>
 						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-list"></i> ดูรายละเอียด</button> <button class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</button></td>
@@ -59,15 +53,10 @@
 							<h4 class="modal-title" id="myModalLabel">ข้อมูลการจองโต๊ะ</h4>
 						</div>
 						<div class="modal-body">
+							<p align="center" ng-if="dataDetail.status == '0'" class="alert alert-danger"><b>รออนุมัติ</b></p>
+							<p align="center" ng-if="dataDetail.status == '1'" class="alert alert-success"><b>อนุมัติแล้ว</b></p>
 							<div class="table-responsive">
 								<table class="table">
-									<tr>
-										<td><b>โต๊ะที่</b></td>
-										<td ng-if="!dataDetail.table_detail">ยังไม่มี</td>
-										<td ng-if="dataDetail.table_detail">{{dataDetail.table_detail.name}}</td>
-										<td><b>จำนวน</b></td>
-										<td>{{dataDetail.person}} คน</td>
-									</tr>
 									<tr>
 										<td><b>วันที่</b></td>
 										<td>{{dataDetail.date}}</td>
@@ -75,14 +64,21 @@
 										<td>{{dataDetail.time}}</td>
 									</tr>
 									<tr>
-										<td><b>ชื่อคนจอง</b></td>
-										<td colspan="3">{{dataDetail.customer_detail.fname}} {{dataDetail.customer_detail.lname}}</td>
+										<td><b>จำนวน</b></td>
+										<td>{{dataDetail.person}} คน</td>
+										<td><b>วันที่ทำการจอง</b></td>
+										<td>{{dataDetail.created_at}}</td>
+										
 									</tr>
 									<tr>
+										<td><b>ชื่อคนจอง</b></td>
+										<td>{{dataDetail.customer_detail.fname}} {{dataDetail.customer_detail.lname}}</td>
 										<td><b>เบอร์โทร</b></td>
 										<td>{{dataDetail.customer_detail.tel}}</td>
+									</tr>
+									<tr>
 										<td><b>อีเมล</b></td>
-										<td>{{dataDetail.customer_detail.email}}</td>
+										<td colspan="3">{{dataDetail.customer_detail.email}}</td>
 									</tr>
 								</table>
 							</div>

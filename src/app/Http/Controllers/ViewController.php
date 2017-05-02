@@ -31,4 +31,8 @@ class ViewController extends Controller {
 		$data['menu'] = menu::get();
 		return view('food.index',array('data' => $data)); 
 	}
+
+	public function reservation() {
+		return view('order.index'); 
+	}
 }

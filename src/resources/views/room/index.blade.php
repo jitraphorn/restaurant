@@ -1,7 +1,4 @@
 @extends('layout.master')
-@section('header')
-@include('layout.main_header')
-@endsection
 @section('content')
 <div ng-controller="roomController as room">
 	<div class="gtco-section">
@@ -27,7 +24,7 @@
 								<p><span class="price cursive-font">{{%$room->price%}} บาท</span></p>
 							</div>
 						</a>
-						<button class="btn btn-info btn-block" ng-click="reservation()">ทำการจอง</button>
+						<button class="btn btn-info btn-block" ng-click="reservation({{%$room%}})">ทำการจอง</button>
 					</div>
 				</div>
 				@endforeach
@@ -79,23 +76,23 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label>ชื่อ</label>
-							<input type="text" class="form-control" ng-model="cusData.fname">
+							<input type="text" class="form-control" ng-model="cusData.fname" required>
 						</div>
 						<div class="form-group col-md-6">
 							<label>นามสกุล</label>
-							<input type="text" class="form-control" ng-model="cusData.lname">
+							<input type="text" class="form-control" ng-model="cusData.lname" required>
 						</div>
 						<div class="clearfix"></div>
 						<div class="form-group col-md-6">
 							<label>เบอร์โทรศัพท์</label>
-							<input type="text" class="form-control" ng-model="cusData.tel">
+							<input type="text" class="form-control" ng-model="cusData.tel" required>
 						</div>
 						<div class="form-group col-md-6">
 							<label>อีเมล</label>
-							<input type="text" class="form-control" ng-model="cusData.email">
+							<input type="text" class="form-control" ng-model="cusData.email" required>
 						</div>
 						<div class="clearfix"></div>
-						<div class="form-group col-md-12">
+						<!-- <div class="form-group col-md-12">
 							<label>ที่อยู่</label>
 							<textarea class="form-control" ng-model="cusData.address"></textarea>
 						</div>
@@ -107,7 +104,7 @@
 								<option value="f">หญิง</option>
 							</select>
 						</div>
-						<div class="clearfix"></div>
+						<div class="clearfix"></div> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-cross"></i> ปิด</button>

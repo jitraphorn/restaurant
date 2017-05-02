@@ -1,8 +1,6 @@
 @extends('layout.master')
-@section('header')
-	@include('layout.home_header')
-@endsection
 @section('content')
+@include('layout.slider')
 <div ng-controller="homeController">
 	<div class="gtco-section">
 		<div class="gtco-container">

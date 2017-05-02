@@ -529,8 +529,11 @@ app.controller('booksController', function ($scope,dataService,API_URL) {
 		})
 	}
 
-	$scope.form = function(){
-		window.location = API_URL+"/admin/books/form";
+	$scope.form = function(data){
+		delete data.$$hashKey;
+		$scope.dataDetail = data;
+		console.log($scope.dataDetail)
+		$('#formModal').modal('show');	
 	}
 
     $scope.delete = function(id){
@@ -540,6 +543,27 @@ app.controller('booksController', function ($scope,dataService,API_URL) {
             }
         });
     }
+
+    $scope.changeStatus = function(id,status){
+		let statusx;
+		if(status == '0'){
+			statusx = 1;
+		}else{
+			statusx = 0;
+		}
+
+		let json = {id:id,status:statusx};
+		console.log(json)
+		dataService.postData("/admin/books/update",json).then(function(res){
+			if(res.data.result){
+				swal("ทำรายการสำเร็จ!", "เลือกโต๊ะเรียบร้อยแล้ว", "success");
+			}else{
+				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
+			}
+			listData();
+		})
+
+	}
 
 	function init(){
 		listData()
@@ -653,7 +677,6 @@ app.controller('tableController', function ($scope, $http,$timeout,dataService) 
 app.controller('orderController', function ($scope, $http,$timeout,dataService) {
 	$("#sidebar > ul > li").removeClass('active');
 	$("#order-menu").addClass('active');
-	$scope.tableList = tableList;
 
 	function listData(){
 		dataService.getData("/admin/order/list").then(function(res){
@@ -677,8 +700,15 @@ app.controller('orderController', function ($scope, $http,$timeout,dataService) 
 		});
 	}
 
-	$scope.changeTable = function(id,tableId){
-		let json = {id:id,table_id:tableId};
+	$scope.changeStatus = function(id,status){
+		let statusx;
+		if(status == '0'){
+			statusx = 1;
+		}else{
+			statusx = 0;
+		}
+
+		let json = {id:id,status:statusx};
 		console.log(json)
 		dataService.postData("/admin/order/update",json).then(function(res){
 			if(res.data.result){
@@ -686,6 +716,7 @@ app.controller('orderController', function ($scope, $http,$timeout,dataService) 
 			}else{
 				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
 			}
+			listData();
 		})
 
 	}

@@ -1,4 +1,4 @@
-<nav class="gtco-nav" role="navigation">
+<nav class="gtco-nav" role="navigation" style="background: rgba(0, 0, 0, 0.8);">
 	<div class="gtco-container">
 		
 		<div class="row">
@@ -11,7 +11,7 @@
 					<li class="has-dropdown">
 						<a href="#">บริการ</a>
 						<ul class="dropdown">
-							<li><a href="#">จองโต๊ะอาหาร</a></li>
+							<li><a href="/order_table">จองโต๊ะอาหาร</a></li>
 							<li><a href="/room">จองห้องพัก</a></li>
 						</ul>
 					</li>
@@ -23,5 +23,3 @@
 		
 	</div>
 </nav>
-
-@yield('header')

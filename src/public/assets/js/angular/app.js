@@ -85,16 +85,21 @@ app.controller('roomController', function ($scope, $http,$timeout,dataService) {
 		$('.slide-modal').modal("show");
 	}
 
-	$scope.reservation = function(){
+	$scope.reservation = function(room){
+		$scope.booking = {};
+		$scope.booking.room_id = room.id;
+		$scope.booking.price = room.price;
 		$('#reservationModal').modal("show");
 	}
 
 	$scope.submitReservation = function(){
-		$scope.booking = {};
 		$scope.booking.checkin_date = moment($('#checkin_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
 		$scope.booking.checkout_date = moment($('#checkout_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
 		let json = {booking:$scope.booking, cusData:$scope.cusData}
 		console.log(json)
+		dataService.postData("/api/books/add",json).then(function(res){
+			console.log(res)
+		})
 	}
 });
 

@@ -1,7 +1,4 @@
 @extends('layout.master')
-@section('header')
-	@include('layout.main_header')
-@endsection
 @section('content')
 <div ng-controller="foodController">
 	<div class="gtco-section">

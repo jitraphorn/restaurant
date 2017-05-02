@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LogSystemController;
 use App\order as order; // add model
 use App\customer as customer; // add model
-use App\table as table; // add model
 use App\menu_list as menu_list;
 use App\menu as menu;
 use Request;
@@ -19,12 +18,11 @@ class OrderController extends Controller {
 
 	public function index(){
 		$data =[];
-		$data['tableList'] = table::get();
-		return view('admin.order.index',array('data' => $data));
+		return view('admin.order.index');
 	}
 
 	public function lists(){
-		$order = order::get();
+		$order = order::orderBy('id','desc')->get();
 		foreach ($order as $key => $value) {
 
 			$order[$key]['customer_detail'] = customer::where('id',$value['customer_id'])->first();
@@ -36,7 +34,6 @@ class OrderController extends Controller {
 			}
 
 			$order[$key]['menu_list'] = $menu_list;
-			$order[$key]['table_detail'] = table::where('id',$value['table_id'])->first();
 		}
 		return $order;
 	}

@@ -17,6 +17,7 @@ Blade::setContentTags('{{{%', '%}}}');
 Route::get('/', 'ViewController@home');
 Route::get('/room', 'ViewController@room');
 Route::get('/food_menu', 'ViewController@food_menu');
+Route::get('/order_table', 'ViewController@reservation');
 
 //- backend
 Route::get('/admin/login', 'UserController@login');
@@ -62,6 +63,7 @@ Route::get('/admin/books/form', 'BookingController@form');
 Route::get('/admin/books/form/{id}', 'BookingController@form');
 Route::post('/admin/books/add', 'BookingController@add');
 Route::get('/admin/books/delete/{id}', 'BookingController@delete');
+Route::post('/admin/books/update', 'BookingController@update');
 
 Route::get('/admin/table', 'TableController@index');
 Route::get('/admin/table/list', 'TableController@lists');
@@ -83,3 +85,4 @@ Route::get('/api/table/list', 'TableController@lists');
 Route::post('/api/order/add', 'OrderController@add');
 Route::post('/api/order/addMenuList', 'OrderController@addMenuList');
 Route::get('/api/menu/list', 'MenuController@lists');
+Route::post('/api/books/add', 'BookingController@add');
