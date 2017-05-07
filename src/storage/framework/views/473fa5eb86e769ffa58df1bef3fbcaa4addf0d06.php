@@ -19,6 +19,7 @@
 						<th>#</th>
 						<th>ชื่อผู้จอง</th>
 						<th>จำนวนคน</th>
+						<th>จำนวนโต๊ะ</th>
 						<th>เวลา</th>
 						<th>สถานะ</th>
 						<th class="text-center">ตัวเลือก</th>
@@ -29,6 +30,7 @@
 						<td>{{$index+1}}</td>
 						<td>{{x.customer_detail.fname + x.customer_detail.lname}}</td>
 						<td>{{x.person}}</td>
+						<td>{{x.count_table}}</td>
 						<td>{{x.date +" "+ x.time}}</td>
 						<td>
 							<select class="form-control" convert-to-number ng-init="dummyStatus = x.status" ng-model="dummyStatus" ng-change="changeStatus(x.id,x.status)">

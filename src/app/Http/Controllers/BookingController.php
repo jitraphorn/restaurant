@@ -46,7 +46,7 @@ class BookingController extends Controller {
 
 	public function add(Request $request){
 		$data = $request::all();
-		if($data['booking']['id']){
+		if(isset($data['booking']['id'])){
 				booking::where('id',$data['booking']['id'])->update($data['booking']);
 				return ['result'=>true];
 		}else{

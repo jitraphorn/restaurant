@@ -126,7 +126,7 @@ class OrderController extends Controller {
 		$data = $request::all();
 		//- manage customer
 
-		if(!$data['order']['id']){
+		if(!isset($data['order']['id'])){
 			$json = file_get_contents("config.json");
 			$config =  json_decode($json, TRUE);
 
@@ -168,6 +168,7 @@ class OrderController extends Controller {
 				}
 			}			
 		}else{
+			$data['order']['count_table'] = ceil($data['order']['person'] / 12);
 			$data['order']['date'] = $data['order']['dateStr'];
 			unset($data['order']['dateStr']);
 			order::where('id',$data['order']['id'])->update($data['order']);
