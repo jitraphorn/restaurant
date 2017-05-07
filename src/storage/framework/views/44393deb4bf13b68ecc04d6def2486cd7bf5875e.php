@@ -1,5 +1,4 @@
-@extends('../admin.layout.master')
-@section('main')
+<?php $__env->startSection('main'); ?>
 <div ng-controller="dashboardController">
 	<div class="row">
 		<div class="col-lg-12">
@@ -21,4 +20,5 @@
 		<button type="submit" class="btn btn-primary">ตกลง</button>
 	</form>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../admin.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

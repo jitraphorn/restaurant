@@ -40,7 +40,25 @@ class OrderController extends Controller {
 
 	public function add(Request $request){
 		$data = $request::all();
+		$json = file_get_contents("config.json");
+		$config =  json_decode($json, TRUE);
 
+		if(!$config['order_status']){
+			return ['result'=>false]; 
+		}
+
+		$data['order']['count_table'] = ceil($data['order']['person'] / 12);
+
+		$orderDate = order::where('date',$data['order']['date'])->where('status',1)->get();
+
+		$countTable = 0;
+		foreach ($orderDate as $key => $value) {
+			$countTable += $value->count_table;
+		}
+
+		if($countTable >= $config['max_table'] || $countTable+$data['order']['count_table'] > $config['max_table']){
+			return ['result'=>false];
+		}
 		//- manage customer
 		$customer = customer::where('email',$data['customer']['email'])->select('id')->first();
 		if(!$customer){
@@ -52,11 +70,10 @@ class OrderController extends Controller {
 
 		//- update table status
 		// table::where('id',$data['order']['table_id'])->update(['status'=>2]);
-
 		//- manage order
 		$data['order']['customer_id'] = $customer_id;
 		$order_id = order::insertGetId($data['order']);
-		return ['result'=>$order_id];
+		return ['result'=>$order_id, "countTable"=>$data['order']['count_table']];
 	}
 
 	public function addMenuList(Request $request){
@@ -81,5 +98,90 @@ class OrderController extends Controller {
 		$data = $request::all();
 		$result = order::where('id',$data['id'])->update($data);
 		return ['result'=>$result];
+	}
+
+	public function form($id = NULL){
+		if($id){
+			$data = [];
+			$data['order'] = order::where("id",$id)->first();
+			$data['customer_detail'] = customer::where("id",$data['order']['customer_id'])->first();
+			$menulist = menu_list::where("order_id",$data['order']['id'])->get();
+			$data['menu_list'] = [];
+			if($menulist){
+				foreach ($menulist as $key => $value) {
+					$data['menu_list'][$value['menu_id']] = $value['amount'];
+				}
+			}
+
+		}else{
+			$data = NULL;
+		}
+
+		$listMenu = menu::get();
+		// return $data;
+		return view('admin.order.form',array("data"=>$data, "listMenu"=>$listMenu));
+	}
+
+	public function addbackend(Request $request){
+		$data = $request::all();
+		//- manage customer
+
+		if(!$data['order']['id']){
+			$json = file_get_contents("config.json");
+			$config =  json_decode($json, TRUE);
+
+			if(!$config['order_status']){
+				return ['result'=>false]; 
+			}
+
+			$data['order']['count_table'] = ceil($data['order']['person'] / 12);
+
+			$orderDate = order::where('date',$data['order']['date'])->where('status',1)->get();
+
+			$countTable = 0;
+			foreach ($orderDate as $key => $value) {
+				$countTable += $value->count_table;
+			}
+
+			if($countTable >= $config['max_table'] || $countTable+$data['order']['count_table'] > $config['max_table']){
+				return ['result'=>false];
+			}
+			$customer = customer::where('email',$data['customer_detail']['email'])->select('id')->first();
+			if(!$customer){
+				$customer_id = customer::insertGetId($data['customer_detail']);
+			}else{
+				customer::where('email',$data['customer_detail']['email'])->update($data['customer_detail']);
+				$customer_id = $customer->id;
+			}
+
+			//- manage order
+			$data['order']['customer_id'] = $customer_id;
+			$data['order']['date'] = $data['order']['dateStr'];
+			unset($data['order']['dateStr']);
+			$order_id = order::insertGetId($data['order']);
+			
+			foreach ($data['menu_list'] as $key => $value) {
+				//$value->order_id = $order_id;
+				if($value > 0){
+					$arr = ["order_id"=>$order_id, "menu_id"=>$key, "amount"=>$value];
+					menu_list::insert($arr);
+				}
+			}			
+		}else{
+			$data['order']['date'] = $data['order']['dateStr'];
+			unset($data['order']['dateStr']);
+			order::where('id',$data['order']['id'])->update($data['order']);
+			menu_list::where('order_id',$data['order']['id'])->delete();
+			foreach ($data['menu_list'] as $key => $value) {
+				//$value->order_id = $order_id;
+				if($value > 0){
+					$arr = ["order_id"=>$data['order']['id'], "menu_id"=>$key, "amount"=>$value];
+					menu_list::insert($arr);
+				}
+			}
+		}
+
+		return ['result'=>true];
+
 	}
 }

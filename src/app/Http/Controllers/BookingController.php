@@ -30,30 +30,40 @@ class BookingController extends Controller {
 
 	public function form($id = NULL){
 		if($id){
-			$data = booking::where('id',$id)->first();
+			$data = [];
+			$data['booking'] = booking::where('id',$id)->first();
+			$data['cusData'] = customer::where('id',$data['booking']['customer_id'])->first();
+			
 		}else{
 			$data = NULL;
 		}
 
-		return view('admin.books.form',array("data"=>$data));
+
+		$roomList = room::get();
+		return view('admin.books.form',array("data"=>$data, "roomList"=>$roomList));
 		
 	}
 
 	public function add(Request $request){
 		$data = $request::all();
-		$customer = customer::where('email',$data['cusData']['email'])->select('id')->first();
-		if(!$customer){
-			$customer_id = customer::insertGetId($data['cusData']);
+		if($data['booking']['id']){
+				booking::where('id',$data['booking']['id'])->update($data['booking']);
+				return ['result'=>true];
 		}else{
-			customer::where('email',$data['cusData']['email'])->update($data['cusData']);
-			$customer_id = $customer->id;
-		}
+			$customer = customer::where('email',$data['cusData']['email'])->select('id')->first();
+			if(!$customer){
+				$customer_id = customer::insertGetId($data['cusData']);
+			}else{
+				customer::where('email',$data['cusData']['email'])->update($data['cusData']);
+				$customer_id = $customer->id;
+			}
 
 		//- manage order
-		$data['booking']['customer_id'] = $customer_id;
-		$data['booking']['code'] = "BK".date('mdHis');
-		$booking_id = booking::insertGetId($data['booking']);
-		return ['result'=>$booking_id];
+			$data['booking']['customer_id'] = $customer_id;
+			$data['booking']['code'] = "BK".date('mdHis');
+			$booking_id = booking::insertGetId($data['booking']);
+			return ['result'=>$booking_id];
+		}
 	}
 
 	public function delete($id = NULL){

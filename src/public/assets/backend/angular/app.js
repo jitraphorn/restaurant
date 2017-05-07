@@ -109,6 +109,32 @@ app.controller('dashboardController', function ($scope,dataService,API_URL) {
 	console.log("Dashboard")
 	$("#sidebar > ul > li").removeClass('active');
 	$("#dashboard-menu").addClass('active');
+
+	function listData(){
+		dataService.getData("/admin/config/list").then(function(res){
+			console.log(res.data);
+			$scope.config = res.data;
+		});
+	}
+
+	$scope.changeOrderStatus = function(){
+		if($scope.config.order_status){
+			$scope.config.order_status = 0;
+		}else{
+			$scope.config.order_status = 1;
+		}
+
+		dataService.postData("/admin/config/update",$scope.config).then(function(res){
+			if(res.data.result){
+				swal("ทำรายการสำเร็จ!", "เปลี่ยนสถานะเรียบร้อยแล้ว", "success");
+			}else{
+				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
+			}
+			listData();
+		})
+	}
+
+	listData();
 });
 
 app.controller('userController', function ($scope,dataService,API_URL) {
@@ -556,7 +582,7 @@ app.controller('booksController', function ($scope,dataService,API_URL) {
 		console.log(json)
 		dataService.postData("/admin/books/update",json).then(function(res){
 			if(res.data.result){
-				swal("ทำรายการสำเร็จ!", "เลือกโต๊ะเรียบร้อยแล้ว", "success");
+				swal("ทำรายการสำเร็จ!", "เปลี่ยนสถานะเรียบร้อยแล้ว", "success");
 			}else{
 				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
 			}
@@ -573,21 +599,54 @@ app.controller('booksController', function ($scope,dataService,API_URL) {
 });
 
 
-app.controller('booksFormController', function ($scope,dataService,API_URL) {
+app.controller('booksFormController', function ($scope,dataService,API_URL,$timeout) {
 	//- Active Menu
 	$("#sidebar > ul > li").removeClass('active');
 	$("#books-menu").addClass('active');
+
+	$scope.roomList = roomList;
 	
+	var myDate = new Date();
 	if(data){
-		$scope.data = data;
+		$scope.booking = data.booking;
+		$scope.booking.room_id += "";
+		$scope.cusData = data.cusData;
+
+		$('#checkin_date').datetimepicker({
+			format: 'DD/MM/YYYY',
+			minDate:new Date(),
+			defaultDate:new Date($scope.booking.checkin_date),
+			debug:true
+		});
+		$('#checkout_date').datetimepicker({
+			format: 'DD/MM/YYYY',
+			minDate:myDate.setDate(myDate.getDate() + 1),
+			defaultDate: new Date($scope.booking.checkout_date)
+		});
 	}else{
-		$scope.data = {};
+		$('#checkin_date').datetimepicker({
+			format: 'DD/MM/YYYY',
+			minDate:new Date(),
+			defaultDate:new Date(),
+			debug:true
+		});
+		$('#checkout_date').datetimepicker({
+			format: 'DD/MM/YYYY',
+			minDate:myDate.setDate(myDate.getDate() + 1),
+			defaultDate:myDate.setDate(myDate.getDate() + 1)
+		});
+		$scope.booking = {};
+		$scope.cusData = {};
 	}
 
     $scope.add = function(data){
-		console.log(data);
+		$scope.booking.checkin_date = moment($('#checkin_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
+		$scope.booking.checkout_date = moment($('#checkout_date').data("DateTimePicker").date()).format('YYYY-MM-DD')
+		let json = {booking:$scope.booking, cusData:$scope.cusData}
+		console.log(json)
 		$('#page-loading').fadeIn();
-		dataService.postData("/admin/menu/add",data).then(function(res){
+		dataService.postData("/api/books/add",json).then(function(res){
+			console.log(res)
 			if(res.data.result){
 				$timeout(function(){
 					swal({
@@ -598,7 +657,7 @@ app.controller('booksFormController', function ($scope,dataService,API_URL) {
 						confirmButtonText: 'กลับสู่หน้าหลัก',
 					},
 					function(){
-						window.location = API_URL+"/admin/user";
+						window.location = API_URL+"/admin/books";
 					});
 				},500)
 
@@ -607,6 +666,26 @@ app.controller('booksFormController', function ($scope,dataService,API_URL) {
 			}
 		$('#page-loading').fadeOut();
 		})
+	}
+
+	$scope.selectedRoom = function(){
+		if(data){
+			$scope.booking.room_id = ""+data.booking.room_id
+			$scope.booking.price = data.booking.price;
+		}else{
+			console.log("asdasdasd")
+			$scope.booking.room_id = ""+$scope.roomList[0].id;
+			$scope.booking.price = $scope.roomList[0].price;
+		}
+	}
+
+	$scope.changeRoom = function(roomId){
+		angular.forEach($scope.roomList, function(value, key) {
+			if(value.id == roomId){
+				$scope.booking.price = value.price;
+				return;
+			}
+		});
 	}
 
 	function init(){
@@ -712,7 +791,7 @@ app.controller('orderController', function ($scope, $http,$timeout,dataService) 
 		console.log(json)
 		dataService.postData("/admin/order/update",json).then(function(res){
 			if(res.data.result){
-				swal("ทำรายการสำเร็จ!", "เลือกโต๊ะเรียบร้อยแล้ว", "success");
+				swal("ทำรายการสำเร็จ!", "เปลี่ยนสถานะเรียบร้อยแล้ว", "success");
 			}else{
 				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
 			}
@@ -726,7 +805,77 @@ app.controller('orderController', function ($scope, $http,$timeout,dataService) 
 	}
 
 	init();
-});
+})
+
+app.controller('orderFormController', function ($scope, $http,$timeout,dataService, API_URL) {
+	$("#sidebar > ul > li").removeClass('active');
+	$("#order-menu").addClass('active');
+
+	$scope.data = {};
+	$scope.data.order = {};
+	$scope.data.customer_detail = {};
+	$scope.data.menu_list = {};
+	$scope.listMenu = listMenu;
+
+	if(data){
+		$scope.data = data;
+		$scope.data.order.date = new Date($scope.data.order.date);
+		console.log(data);
+	}else{
+		$scope.data.order.person = 1;
+		$scope.data.order.date = new Date();
+		$scope.data.order.time = "9.00น. - 12.00น.";
+	}
+
+
+	$scope.add = function(data){
+		$('#page-loading').fadeIn();
+		var d = new Date(data.order.date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    	if (month.length < 2) month = '0' + month;
+    	if (day.length < 2) day = '0' + day;
+
+    	data.order.dateStr = [year, month, day].join('-');
+    	console.log("dataaaa",data);
+		dataService.postData("/admin/order/addbackend",data).then(function(res){
+			console.log(res)
+			if(res.data.result){
+				$timeout(function(){
+					swal({
+						title: "การทำรายการสำเร็จ!",
+						text: "ข้อมูลของคุณถูกบันทึกแล้ว",
+						type: "success",
+						confirmButtonClass: "btn-default",
+						confirmButtonText: 'กลับสู่หน้าหลัก',
+					},
+					function(){
+						window.location = API_URL+"/admin/order";
+					});
+				},500)
+
+			}else{
+				swal("การทำรายการผิดพลาด!", "กรุณาลองใหม่อีกครั้ง", "error");
+			}
+			$('#page-loading').fadeOut();
+		})
+	}
+
+	$scope.initAmount = function(key){
+		if(data){
+			if($scope.data.menu_list[key]){
+				$scope.data.menu_list[key] = data.menu_list[key];	
+			}else{
+				$scope.data.menu_list[key] = 0;
+			}
+			
+		}else{
+			$scope.data.menu_list[key] = 0;
+		}
+	}
+})
 
 
 

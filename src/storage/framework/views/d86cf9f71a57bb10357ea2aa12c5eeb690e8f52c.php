@@ -1,5 +1,4 @@
-@extends('layout.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="clearfix"></div>
 <div class="container-fluid gtco-section" style="background: #efefef;">
 	<div class="col-md-4 col-md-offset-4" style="margin-top:50px;margin-bottom: 50px;background: #fff;padding: 20px;border-radius: 10px;border:1px #ccc solid;">
@@ -92,7 +91,6 @@
 							<h4 class="modal-title" id="myModalLabel">รายการอาหาร</h4>
 						</div>
 						<div class="modal-body">
-							<h3>เลือกได้สูงสุด {{maxMenu}} จาน | เลือกแล้ว {{haveMenu}} จาน</h3>
 							<div class="table-responsive">
 								<table class="table">
 									<tr>
@@ -107,7 +105,7 @@
 										</td>
 										<td>{{x.name}}</td>
 										<td>{{x.price | number:2}}</td>
-										<td style="max-width: 80px"><input type="number" class="form-control text-center" min="0" ng-model="menu_list[x.id]" ng-init="menu_list[x.id] = 0" ng-change="checkNumMenu()"></td>
+										<td style="max-width: 80px"><input type="number" class="form-control text-center" ng-model="menu_list[x.id]" ng-init="menu_list[x.id] = 0"></td>
 									</tr>
 								</table>
 							</div>
@@ -122,4 +120,5 @@
 		</div>
 	</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

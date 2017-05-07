@@ -19,22 +19,28 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 		let json = {order:$scope.tableData,customer:data}
 		console.log(json);
 		dataService.postData("/api/order/add",json).then(function(res){
-			console.log(res.data.result);
-			if(confirm('ต้องการเลือกรายการอาหารหรือไม่?')){
-				$('#tableModal').modal("hide")
-				$timeout(function() {
-					menuOrder(res.data.result);
-				}, 500);
+				console.log(res.data.result);
+			if(res.data.result){
+				if(confirm('ต้องการเลือกรายการอาหารหรือไม่?')){
+					$('#tableModal').modal("hide")
+					$timeout(function() {
+						menuOrder(res.data.result,res.data.countTable);
+					}, 500);
+				}else{
+					$('#tableModal').modal("hide")
+					alert("ทำรายการสำเร็จแล้ว!")
+				}
 			}else{
-				$('#tableModal').modal("hide")
-				alert("ทำรายการสำเร็จแล้ว!")
+				alert("จำนวนโต๊ะในวันที่เลือกเต็มแล้ว !!")
 			}
 		})
 	}
 
-	function menuOrder(orderId){
+	function menuOrder(orderId,countTable){
 		$scope.menu_list = [];
 		$scope.order_id = orderId;
+		$scope.maxMenu = countTable * 12;
+		$scope.haveMenu = 0;
 		dataService.getData("/api/menu/list").then(function(res){
 			$scope.listMenu = res.data;
 			$('#menuModal').modal("show")
@@ -42,6 +48,10 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 	}
 
 	$scope.submitMenu = function(){
+		if($scope.haveMenu > $scope.maxMenu){
+			alert("จำนวนรายการอาหารเกินที่กำหนด !");
+			return;
+		}
 		var menu_list = [];
 		console.log($scope.menu_list)
 		angular.forEach($scope.menu_list, function(amount, key) {
@@ -58,6 +68,16 @@ app.controller('mainController', function ($scope, $http,$timeout,dataService) {
 			}
 		})
 
+	}
+
+	$scope.checkNumMenu = function(){
+		$scope.haveMenu = 0;
+		angular.forEach($scope.menu_list, function(amount, key) {
+			if(amount > 0){
+				$scope.haveMenu += amount;
+			}
+
+		});
 	}
 
 });
@@ -98,7 +118,12 @@ app.controller('roomController', function ($scope, $http,$timeout,dataService) {
 		let json = {booking:$scope.booking, cusData:$scope.cusData}
 		console.log(json)
 		dataService.postData("/api/books/add",json).then(function(res){
-			console.log(res)
+			if(res.data.result){
+				alert("ทำการจองเรียบร้อยแล้ว");
+				$('#reservationModal').modal("hide");
+			}else{
+				alert("ทำรายการผิดพลาด!")
+			}
 		})
 	}
 });

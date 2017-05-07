@@ -33,7 +33,7 @@ class RoomController extends Controller {
 		}else{
 			$data = NULL;
 		}
-
+		
 		return view('admin.room.form',array("data"=>$data));
 		
 	}

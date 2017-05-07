@@ -34,6 +34,8 @@
   <!-- owl carousel -->
   <link rel="stylesheet" href="{!! asset('assets/backend/css/owl.carousel.css') !!}" type="text/css">
   <link href="{!! asset('assets/backend/css/jquery-jvectormap-1.2.2.css') !!}" rel="stylesheet">
+  <!-- Bootstrap DateTimePicker -->
+  <link href="{!! asset('assets/css/bootstrap-datetimepicker.min.css') !!}" rel="stylesheet">
   <!-- Custom styles -->
   <link rel="stylesheet" href="{!! asset('assets/backend/css/fullcalendar.css') !!}">
   <link href="{!! asset('assets/backend/css/widgets.css') !!}" rel="stylesheet">
@@ -105,6 +107,8 @@
 <script src="{!! asset('assets/backend/js/charts.js') !!}"></script>
 <script src="{!! asset('assets/backend/js/jquery.slimscroll.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/backend/js/sweetalert.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/js/moment.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/js/bootstrap-datetimepicker.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/js/angular.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/backend/angular/app.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/backend/angular/service.js') !!}"></script>

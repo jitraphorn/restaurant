@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header"><i class="icon-book3"></i>การจองห้องพัก</h3>
-<!-- 			<a class="btn btn-success" href="/admin/books/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a> -->
+			<a class="btn btn-success" href="/admin/books/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
@@ -30,7 +30,7 @@
 					<tr ng-repeat="x in data" ng-class="{'success': x.status == '1'}">
 						<td>{{$index+1}}</td>
 						<td>{{x.code}}</td>
-						<td>{{x.roomDetail.name}}</td>
+						<td>{{x.room_detail.title}}</td>
 						<td>{{x.price | number:2}}</td>
 						<td>{{x.checkin_date}} - {{x.checkout_date}}</td>
 						<td>
@@ -39,7 +39,7 @@
 								<option value="1" ng-selected="x.status == '1'">อนุมัติแล้ว</option>
 							</select>
 						</td>
-						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-list"></i> ดูรายละเอียด</button> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
+						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-list"></i> ดูรายละเอียด</button> <a class="btn btn-warning" href="/admin/books/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
 					</tr>
 				</tbody>
 			</table>

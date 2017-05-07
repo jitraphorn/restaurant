@@ -77,8 +77,12 @@ Route::get('/admin/order/form/{id}', 'OrderController@form');
 Route::post('/admin/order/add', 'OrderController@add');
 Route::get('/admin/order/delete/{id}', 'OrderController@delete');
 Route::post('/admin/order/update', 'OrderController@update');
+Route::post('/admin/order/addbackend', 'OrderController@addbackend');
 
 Route::post('/admin/file/add', 'FileController@add');
+
+Route::get('/admin/config/list', 'ConfigController@lists');
+Route::post('/admin/config/update', 'ConfigController@updates');
 
 //- fontend
 Route::get('/api/table/list', 'TableController@lists');

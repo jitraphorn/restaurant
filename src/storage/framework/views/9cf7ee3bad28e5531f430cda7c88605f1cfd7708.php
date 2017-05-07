@@ -1,14 +1,13 @@
-@extends('../admin.layout.master')
-@section('main')
-<div ng-controller="orderController">
+<?php $__env->startSection('main'); ?>
+<div ng-controller="booksController">
 	<div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header"><i class="icon-icon-chair"></i>การจองโต๊ะอาหาร</h3>
-			<a class="btn btn-success" href="/admin/order/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
+			<h3 class="page-header"><i class="icon-book3"></i>การจองห้องพัก</h3>
+			<a class="btn btn-success" href="/admin/books/form" style='float:right'><i class="icon-plus-circle2"></i> เพิ่มข้อมูล</a>
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/admin/">หน้าแรก</a></li>
-				<li><i class="icon-icon-chair"></i>การจองโต๊ะอาหาร</li>                
+				<li><i class="icon-book3"></i>การจองห้องพัก</li>                
 			</ol>
 		</div>
 	</div>
@@ -18,10 +17,10 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>ชื่อผู้จอง</th>
-						<th>จำนวนคน</th>
-						<th>จำนวนโต๊ะ</th>
-						<th>เวลา</th>
+						<th>รหัสการจอง</th>
+						<th>ชื่อห้องพัก</th>
+						<th>ราคารวม</th>
+						<th>เช็คอิน - เช็คเอาท์</th>
 						<th>สถานะ</th>
 						<th class="text-center">ตัวเลือก</th>
 					</tr>
@@ -29,17 +28,17 @@
 				<tbody>
 					<tr ng-repeat="x in data" ng-class="{'success': x.status == '1'}">
 						<td>{{$index+1}}</td>
-						<td>{{x.customer_detail.fname + x.customer_detail.lname}}</td>
-						<td>{{x.person}}</td>
-						<td>{{x.count_table}}</td>
-						<td>{{x.date +" "+ x.time}}</td>
+						<td>{{x.code}}</td>
+						<td>{{x.room_detail.title}}</td>
+						<td>{{x.price | number:2}}</td>
+						<td>{{x.checkin_date}} - {{x.checkout_date}}</td>
 						<td>
 							<select class="form-control" convert-to-number ng-init="dummyStatus = x.status" ng-model="dummyStatus" ng-change="changeStatus(x.id,x.status)">
 								<option value="0" ng-selected="x.status == '0'">รออนุมัติ</option>
 								<option value="1" ng-selected="x.status == '1'">อนุมัติแล้ว</option>
 							</select>
 						</td>
-						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-list"></i> ดูรายละเอียด</button> <a class="btn btn-warning" href="/admin/order/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <button class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</button></td>
+						<td class="text-center"><button class="btn btn-info" ng-click="form(x)"><i class="icon-list"></i> ดูรายละเอียด</button> <a class="btn btn-warning" href="/admin/books/form/{{x.id}}"><i class="icon-pencil5"></i> แก้ไข</a> <a class="btn btn-danger" href="javascript:void(0)" ng-click="delete(x.id)"><i class="icon-bin"></i> ลบ</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -52,7 +51,7 @@
 					<form ng-submit="submit(formData)">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">ข้อมูลการจองโต๊ะ</h4>
+							<h4 class="modal-title" id="myModalLabel">ข้อมูลการจองห้องพัก</h4>
 						</div>
 						<div class="modal-body">
 							<p align="center" ng-if="dataDetail.status == '0'" class="alert alert-danger"><b>รออนุมัติ</b></p>
@@ -60,17 +59,22 @@
 							<div class="table-responsive">
 								<table class="table">
 									<tr>
-										<td><b>วันที่</b></td>
-										<td>{{dataDetail.date}}</td>
-										<td><b>เวลา</b></td>
-										<td>{{dataDetail.time}}</td>
+										<td><b>รหัสการจอง</b></td>
+										<td>{{dataDetail.code}}</td>
+										<td><b>ชื่อห้อง</b></td>
+										<td>{{dataDetail.room_detail.title}}</td>
 									</tr>
 									<tr>
-										<td><b>จำนวน</b></td>
-										<td>{{dataDetail.person}} คน</td>
+										<td><b>ตั้งแต่</b></td>
+										<td>{{dataDetail.checkin_date}}</td>
+										<td><b>จนถึง</b></td>
+										<td>{{dataDetail.checkout_date}}</td>
+									</tr>
+									<tr>
+										<td><b>ราคา</b></td>
+										<td>{{dataDetail.price}}</td>
 										<td><b>วันที่ทำการจอง</b></td>
 										<td>{{dataDetail.created_at}}</td>
-										
 									</tr>
 									<tr>
 										<td><b>ชื่อคนจอง</b></td>
@@ -82,29 +86,9 @@
 										<td><b>อีเมล</b></td>
 										<td colspan="3">{{dataDetail.customer_detail.email}}</td>
 									</tr>
+						
 								</table>
 							</div>
-							<hr>
-							<div class="modal-header" style="margin: 15px -15px;">
-								<h4 class="modal-title">รายการอาหาร</h4>
-							</div>
-							<div class="table-responsive" ng-if="dataDetail.menu_list.length">
-								<table class="table">
-									<tr>
-										<th class="text-center">รูปภาพ</th>
-										<th class="text-center">ชื่อเมนู</th>
-										<th style="max-width: 80px" class="text-center">จำนวน</th>
-									</tr>
-									<tr ng-repeat="x in dataDetail.menu_list">
-										<td>
-											<img src="{{x.menu_detail.image}}" alt="Image" style="width:50px;height: 50px">
-										</td>
-										<td>{{x.menu_detail.name}}</td>
-										<td class="text-center">{{x.amount}}</td>
-									</tr>
-								</table>
-							</div>
-							<h5 align="center" ng-if="!dataDetail.menu_list.length"> ไม่มีรายการอาหาร </h5>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-cross"></i> ปิด</button>
@@ -114,4 +98,5 @@
 			</div>
 		</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../admin.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
