@@ -118,7 +118,7 @@ app.controller('dashboardController', function ($scope,dataService,API_URL) {
 	}
 
 	$scope.changeOrderStatus = function(){
-		if($scope.config.order_status){
+		if($scope.config.order_status == 1){
 			$scope.config.order_status = 0;
 		}else{
 			$scope.config.order_status = 1;

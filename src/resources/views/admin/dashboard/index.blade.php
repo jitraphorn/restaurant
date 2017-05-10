@@ -10,8 +10,8 @@
 	<h2>การตั้งค่า</h2>
 	<div class="form-group">
 		<label>เปิด/ปิดการจองโต๊ะ : </label>
-		<button type="button" class="btn btn-success" ng-if="config.order_status" ng-click="changeOrderStatus()"><i class="icon-check"></i>เปิดการจองโต๊ะแล้ว</button>
-		<button type="button" class="btn btn-danger" ng-if="!config.order_status" ng-click="changeOrderStatus()"><i class="icon-cross"></i>ปิดการจองโต๊ะแล้ว</button>
+		<button type="button" class="btn btn-success" ng-if="config.order_status == 1" ng-click="changeOrderStatus()"><i class="icon-check"></i>เปิดการจองโต๊ะแล้ว</button>
+		<button type="button" class="btn btn-danger" ng-if="config.order_status == 0" ng-click="changeOrderStatus()"><i class="icon-cross"></i>ปิดการจองโต๊ะแล้ว</button>
 	</div>
 	<form class="form-inline form-group">
 		<div class="form-group">
